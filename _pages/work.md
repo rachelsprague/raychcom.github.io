@@ -21,9 +21,9 @@ classes: wide
 
   <!-- Social icons row -->
   <div class="social-row social-row--icons">
-    <a class="social-icon-btn" href="https://github.com/raychcom" target="_blank" rel="noopener" aria-label="GitHub">
+    <!-- <a class="social-icon-btn" href="https://github.com/raychcom" target="_blank" rel="noopener" aria-label="GitHub">
       <i class="fa-brands fa-github"></i>
-    </a>
+    </a> -->
     <a class="social-icon-btn" href="https://www.linkedin.com/in/rsprague" target="_blank" rel="noopener" aria-label="LinkedIn">
       <i class="fa-brands fa-linkedin"></i>
     </a>
