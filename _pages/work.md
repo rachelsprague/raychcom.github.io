@@ -62,7 +62,8 @@ classes: wide
 
     <p>
       This site lives on 
-      <a href="https://github.com/raychcom" target="_blank" rel="noopener">GitHub</a>. 
+      <!-- <a href="https://github.com/raychcom" target="_blank" rel="noopener">GitHub</a>. -->
+      Github.
       Built with 
       <a href="https://jekyllrb.com/" target="_blank" rel="noopener">Jekyll</a> + 
       <a href="https://mademistakes.com/work/jekyll-themes/minimal-mistakes/" target="_blank" rel="noopener">Minimal Mistakes</a>.
