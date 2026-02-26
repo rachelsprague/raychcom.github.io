@@ -29,7 +29,7 @@ classes: wide
     </a>
   </div>
 
-  <!-- Selected Work -->
+  <!-- Selected Work 
   <div class="linktree-section">
     <h2 class="linktree-section__title">Projects</h2>
     <div class="linktree-links">
@@ -37,7 +37,7 @@ classes: wide
         Personal Site (GitHub Pages Repo)
       </a>
     </div>
-  </div>
+  </div> -->
 
   <!-- Utilities -->
   <div class="linktree-section">
