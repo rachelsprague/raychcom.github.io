@@ -9,7 +9,7 @@ title: Raych's Turtle Cove
   <img src="/assets/images/turtle_logo.png" alt="Raych's Turtle Cove logo" class="logo">
 
   <!-- Social media icons inline -->
-  <div class="social-row social-row--icons">
+  <div class="social-icons-inline">
     <a href="https://bsky.app/profile/turtles.raych.com" target="_blank" rel="noopener" aria-label="Bluesky">
       <i class="fa-brands fa-bluesky"></i>
     </a>
