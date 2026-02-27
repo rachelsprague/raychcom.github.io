@@ -31,11 +31,13 @@ main {
 
 /* Logo at top */
 .logo {
-  width: 120px;
-  border-radius: 50%;         /* keep it circular */
+  width: 120px;            /* desired width */
+  height: 120px;           /* make it square */
+  object-fit: cover;       /* scales image to fill box, crops if needed */
+  border-radius: 50%;      /* circular */
   margin-bottom: 1rem;
-  border: 3px solid #fff;     /* white border, 3px thick */
-  padding: 3px;               /* optional: space between border and image */
+  border: 3px solid #fff;  /* white border */
+  padding: 3px;            /* optional spacing between border and image */
 }
 
 /* ================================
