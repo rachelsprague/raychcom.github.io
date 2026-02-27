@@ -9,7 +9,6 @@ title: raych.com
   <img src="/assets/images/raych.png" alt="raych logo" class="logo">
 
   <!-- Social media icons inline -->
-  <!-- Social media icons inline -->
 <div class="social-icons-inline">
   <a href="https://open.spotify.com/user/31ekhjd5x5qoyln7zo4zkv4tneay" target="_blank" rel="noopener" aria-label="Spotify">
     <i class="fa-brands fa-spotify"></i>
