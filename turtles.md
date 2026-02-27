@@ -11,7 +11,7 @@ title: Raych's Turtle Cove
   <!-- Social media icons inline -->
   <div class="social-icons-inline">
     <a href="https://bsky.app/profile/turtles.raych.com" target="_blank" rel="noopener" aria-label="Bluesky">
-      <i class="fa-brands fa-bluesky"></i>
+      <img src="/assets/icons/bluesky.svg" alt="Bluesky" class="social-svg">
     </a>
     <a href="https://youtube.com/@turtle_cove_raych" target="_blank" rel="noopener" aria-label="YouTube">
       <i class="fab fa-youtube"></i>
