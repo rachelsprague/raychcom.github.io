@@ -44,22 +44,38 @@ main {
    Inline social icons under logo
    ================================ */
 
-/* Make social icons container only as wide as its icons */
-/* Social icons inline under logo */
+/* ================================
+   Inline social icons under logo
+   ================================ */
+
 .social-icons-inline {
   display: flex;
-  justify-content: center;
-  gap: 0.5rem;            /* spacing between icons */
-  margin-bottom: 1.5rem;
-  width: max-content;      /* shrink-wrap to icons */
-  margin-left: auto;
-  margin-right: auto;      /* center the group */
+  justify-content: center;   /* centers icons inside */
+  align-items: center;
+  gap: 14px;                 /* spacing between icons */
+  margin: 1rem auto 1.5rem;  /* centers the container itself */
+  width: max-content;        /* shrink-wrap to icons */
 }
 
 .social-icons-inline a {
-  color: #eee;             /* light color on black background */
-  font-size: 32px;         /* size of icons */
-  transition: transform 0.2s, color 0.2s;
+  color: #eee;
+  font-size: 32px;
+  text-decoration: none;
+  line-height: 1;
+  transition: transform 0.2s, opacity 0.2s;
+}
+
+.social-icons-inline a:hover {
+  transform: scale(1.1);
+  opacity: 0.75;
+}
+
+/* Simple Icons SVG */
+.social-svg {
+  width: 32px;
+  height: 32px;
+  display: block;
+  filter: invert(1);
 }
 
 .social-icons-inline a:hover {
