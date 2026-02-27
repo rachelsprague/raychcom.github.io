@@ -9,24 +9,24 @@ title: raych.com
   <img src="/assets/images/raych.png" alt="raych logo" class="logo">
 
   <!-- Social media icons inline -->
-  <div class="social-icons-inline">
-    <a href="https://open.spotify.com/user/31ekhjd5x5qoyln7zo4zkv4tneay" target="_blank" rel="noopener" aria-label="Spotify">
-      <!-- <img src="/assets/images/github.svg" alt="GitHub" /> -->
-      <i class="fab fa-spotify"></i>
-    </a>
-    <a href="https://bsky.app/profile/raych.com" target="_blank" rel="noopener" aria-label="Bluesky">
-      <i class="fa-brands fa-bluesky"></i>
-    </a>
-    <a href="https://youtube.com/@raych_com" target="_blank" rel="noopener" aria-label="YouTube">
-      <i class="fab fa-youtube"></i>
-    </a>
-    <a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener" aria-label="Twitch">
-      <i class="fab fa-twitch"></i>
-    </a>
-    <a href="https://byraych.substack.com/" target="_blank" rel="noopener" aria-label="Substack">
-      <i class="fas fa-newspaper"></i>
-    </a>
-  </div>
+  <!-- Social media icons inline -->
+<div class="social-icons-inline">
+  <a href="https://open.spotify.com/user/31ekhjd5x5qoyln7zo4zkv4tneay" target="_blank" rel="noopener" aria-label="Spotify">
+    <i class="fa-brands fa-spotify"></i>
+  </a>
+  <a href="https://bsky.app/profile/raych.com" target="_blank" rel="noopener" aria-label="Bluesky">
+    <i class="fa-brands fa-bluesky"></i>
+  </a>
+  <a href="https://youtube.com/@raych_com" target="_blank" rel="noopener" aria-label="YouTube">
+    <i class="fa-brands fa-youtube"></i>
+  </a>
+  <a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener" aria-label="Twitch">
+    <i class="fa-brands fa-twitch"></i>
+  </a>
+  <a href="https://byraych.substack.com/" target="_blank" rel="noopener" aria-label="Substack">
+    <i class="fa-solid fa-newspaper"></i>
+  </a>
+</div>
 
 
   <!-- Links Section -->
