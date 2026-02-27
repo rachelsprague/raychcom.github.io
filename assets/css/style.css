@@ -78,11 +78,6 @@ main {
   filter: invert(1);
 }
 
-.social-icons-inline a:hover {
-  transform: scale(1.1);
-  color: #1db954;          /* example hover color (green) */
-}
-
 .social-icons-inline img {
   width: 32px;
   height: 32px;
@@ -91,33 +86,6 @@ main {
 
 .social-icons-inline a:hover img {
   transform: scale(1.1);
-}
-
-.social-icons-inline {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;              /* controls spacing between icons */
-  margin: 1rem 0 1.5rem;
-}
-
-.social-icons-inline a {
-  color: #eee;
-  font-size: 1.4rem;
-  text-decoration: none;
-  line-height: 1;
-}
-
-.social-icons-inline a:hover {
-  opacity: 0.75;
-}
-
-/* SVG icons (Simple Icons) */
-.social-svg {
-  width: 22px;
-  height: 22px;
-  display: block;
-  filter: invert(1);      /* makes it white for dark backgrounds */
 }
 
 /* ================================
