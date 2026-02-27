@@ -43,19 +43,26 @@ main {
    ================================ */
 
 /* Make social icons container only as wide as its icons */
+/* Social icons inline under logo */
 .social-icons-inline {
   display: flex;
   justify-content: center;
-  gap: 0.5rem;         /* spacing between icons */
-  margin: 1rem auto 1.5rem auto;  /* center it horizontally */
-  width: max-content;  /* shrink-wrap to icons */
+  gap: 0.5rem;            /* spacing between icons */
+  margin-bottom: 1.5rem;
+  width: max-content;      /* shrink-wrap to icons */
+  margin-left: auto;
+  margin-right: auto;      /* center the group */
 }
 
 .social-icons-inline a {
-  display: inline-block;
-  background: none !important;   /* remove gray box */
-  padding: 0 !important;         /* remove padding */
-  border-radius: 0 !important;   /* remove rounded corners */
+  color: #eee;             /* light color on black background */
+  font-size: 32px;         /* size of icons */
+  transition: transform 0.2s, color 0.2s;
+}
+
+.social-icons-inline a:hover {
+  transform: scale(1.1);
+  color: #1db954;          /* example hover color (green) */
 }
 
 .social-icons-inline img {
