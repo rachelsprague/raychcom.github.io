@@ -1,0 +1,139 @@
+/* ================================
+   General page styling
+   ================================ */
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 2rem;
+  text-align: center;
+  background: #f5f5f5; /* subtle page background behind container */
+}
+
+/* Centered main container for content */
+main {
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* ================================
+   Landing page container
+   ================================ */
+.landing-container {
+  background: #111;                  /* black background */
+  color: #eee;                       /* light text color */
+  border-radius: 20px;               /* rounded corners */
+  padding: 2.5rem 2rem;              /* inner spacing */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* subtle shadow */
+  max-width: 380px;                  /* constrain width like Linktree */
+  margin: 2rem auto;                 /* center container on page */
+}
+
+/* Logo at top */
+.logo {
+  width: 120px;
+  border-radius: 50%;         /* keep it circular */
+  margin-bottom: 1rem;
+  border: 3px solid #fff;     /* white border, 3px thick */
+  padding: 3px;               /* optional: space between border and image */
+}
+
+/* ================================
+   Inline social icons under logo
+   ================================ */
+
+/* Make social icons container only as wide as its icons */
+.social-icons-inline {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;         /* spacing between icons */
+  margin: 1rem auto 1.5rem auto;  /* center it horizontally */
+  width: max-content;  /* shrink-wrap to icons */
+}
+
+.social-icons-inline a {
+  display: inline-block;
+  background: none !important;   /* remove gray box */
+  padding: 0 !important;         /* remove padding */
+  border-radius: 0 !important;   /* remove rounded corners */
+}
+
+.social-icons-inline img {
+  width: 32px;
+  height: 32px;
+  transition: transform 0.2s;
+}
+
+.social-icons-inline a:hover img {
+  transform: scale(1.1);
+}
+
+/* ================================
+   Section headings
+   ================================ */
+h2 {
+  margin-top: 2rem;
+  font-size: 1.3rem;
+  color: #ccc;        /* lighter than main text for headings */
+}
+
+/* ================================
+   Buttons / Links in landing container
+   ================================ */
+.landing-container a:not(.social-icons-inline a) {
+  display: block;
+  margin: 0.8rem auto;
+  padding: 0.8rem 1.5rem;
+  max-width: 260px;
+  text-align: center;
+  text-decoration: none;
+  color: #eee;            /* light text on dark background */
+  background: #222;       /* darker gray background for buttons */
+  border-radius: 10px;
+  transition: background 0.2s, transform 0.2s;
+  font-weight: 500;
+}
+
+.landing-container a:not(.social-icons-inline a):hover {
+  background: #333;        /* slightly lighter on hover */
+  transform: scale(1.02);
+}
+
+/* ================================
+   Blog / Article pages
+   ================================ */
+article h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+article p em {
+  color: #aaa;
+  font-size: 0.9rem;
+}
+
+/* ================================
+   Headings
+   ================================ */
+h1 {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+/* ================================
+   Responsive / desktop tweaks
+   ================================ */
+@media screen and (min-width: 1024px) {
+  main {
+    max-width: 720px;
+  }
+
+  .landing-container {
+    max-width: 400px; /* slightly wider container on desktop */
+  }
+
+  .landing-container a:not(.social-icons-inline a) {
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+  }
+}
