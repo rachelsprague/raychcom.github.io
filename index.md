@@ -34,7 +34,7 @@ title: raych.com
   <a href="https://bsky.app/profile/photos.raych.com" target="_blank" rel="noopener">Photos (Bluesky)</a>
   <a href="https://bsky.app/profile/shorts.raych.com" target="_blank" rel="noopener">Shorts (Bluesky)</a>
   <a href="/turtles/" target="_blank" rel="noopener">🐢 Turtles 🐢</a>
-  <a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 Co-working w/ Guppies Livestream 🐠</a>
+  <a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 Aquarium Livestream 🐠</a>
   <a href="/makes/" target="_blank" rel="noopener">Raych Makes</a>
 
   <!-- Utilities Section 
