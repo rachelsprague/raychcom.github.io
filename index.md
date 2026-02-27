@@ -14,7 +14,7 @@ title: raych.com
     <i class="fa-brands fa-spotify"></i>
   </a>
   <a href="https://bsky.app/profile/raych.com" target="_blank" rel="noopener" aria-label="Bluesky">
-    <i class="fa-brands fa-bluesky"></i>
+    <img src="/assets/icons/bluesky.svg" alt="Bluesky" class="social-svg">
   </a>
   <a href="https://youtube.com/@raych_com" target="_blank" rel="noopener" aria-label="YouTube">
     <i class="fa-brands fa-youtube"></i>
