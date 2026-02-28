@@ -31,13 +31,39 @@ body.turtles-page {
    Landing page container
    ================================ */
 .landing-container {
-  background: #111;                  /* black background */
+  background: rgba(17,17,17,0.85);   /* black background */
   color: #eee;                       /* light text color */
   border-radius: 20px;               /* rounded corners */
   padding: 2.5rem 2rem;              /* inner spacing */
   box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* subtle shadow */
-  max-width: 380px;                  /* constrain width like Linktree */
+  max-width: 400px;                  /* constrain width like Linktree */
   margin: 2rem auto;                 /* center container on page */
+}
+
+.landing-container h2,
+.landing-container a,
+.landing-container p {
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+}
+
+.landing-container a:not(.social-icons-inline a) {
+  display: block;
+  margin: 0.8rem auto;
+  padding: 1rem 2rem;
+  max-width: 260px;
+  text-align: center;
+  text-decoration: none;
+  color: #eee;            /* light text on dark background */
+  background: #222;       /* darker gray background for buttons */
+  border-radius: 10px;
+  transition: background 0.2s, transform 0.2s;
+  font-weight: 500;
+   font-size: 1.1rem;
+}
+
+.landing-container a:not(.social-icons-inline a):hover {
+  background: #333;        /* slightly lighter on hover */
+  transform: scale(1.02);
 }
 
 /* Logo at top */
@@ -109,28 +135,6 @@ h2 {
 }
 
 /* ================================
-   Buttons / Links in landing container
-   ================================ */
-.landing-container a:not(.social-icons-inline a) {
-  display: block;
-  margin: 0.8rem auto;
-  padding: 0.8rem 1.5rem;
-  max-width: 260px;
-  text-align: center;
-  text-decoration: none;
-  color: #eee;            /* light text on dark background */
-  background: #222;       /* darker gray background for buttons */
-  border-radius: 10px;
-  transition: background 0.2s, transform 0.2s;
-  font-weight: 500;
-}
-
-.landing-container a:not(.social-icons-inline a):hover {
-  background: #333;        /* slightly lighter on hover */
-  transform: scale(1.02);
-}
-
-/* ================================
    Blog / Article pages
    ================================ */
 article h1 {
@@ -158,20 +162,3 @@ h1 {
   main {
     max-width: 720px;
   }
-
-/* Semi-transparent main container */
-.landing-container {
-  background: rgba(17,17,17,0.85); /* 0.85 opacity black */
-  color: #eee;
-  border-radius: 20px;
-  padding: 2.5rem 2rem;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-  max-width: 400px;
-  margin: 2rem auto;
-}
-
-  .landing-container a:not(.social-icons-inline a) {
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
-  }
-}
