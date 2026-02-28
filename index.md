@@ -1,6 +1,7 @@
 ---
 layout: default
 title: raych.com
+body_class: home-page
 ---
 
 <div class="landing-container">
