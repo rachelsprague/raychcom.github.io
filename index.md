@@ -1,6 +1,6 @@
 ---
 layout: default
-title: raych.com
+title: Raych
 body_class: home-page
 ---
 
