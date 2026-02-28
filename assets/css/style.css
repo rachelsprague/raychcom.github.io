@@ -16,13 +16,16 @@ main {
   width: 100%;
 }
 
-/* ================================
-   Turtle-specific page styling
-   ================================ */
 body.turtles-page {
   background: url('/assets/images/turtle-background.jpg') no-repeat center center;
   background-size: cover;
   background-attachment: fixed;
+}
+
+body.home-page {
+  background: url('/assets/images/raych-background.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* optional parallax effect */
 }
 
 /* ================================
