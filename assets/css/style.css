@@ -7,10 +7,10 @@ body {
   margin: 0;
   padding: 2rem;
   text-align: center;
-  background: #f5f5f5; /* subtle page background behind container */
+  background: #f5f5f5; /* fallback background */
 }
 
-/* Centered main container for content */
+/* Centered main container */
 main {
   margin: 0 auto;
   width: 100%;
@@ -20,80 +20,68 @@ main {
    Turtle-specific page styling
    ================================ */
 
-/* Background for Turtle Cove page */
 body.turtles-page {
   background: url('/assets/images/turtle-background.jpg') no-repeat center center;
-  background-size: cover;       /* fills the viewport */
-  background-attachment: fixed; /* optional, parallax effect */
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 /* ================================
    Landing page container
    ================================ */
 .landing-container {
-  background: rgba(17,17,17,0.85);   /* black background */
-  color: #eee;                       /* light text color */
-  border-radius: 20px;               /* rounded corners */
-  padding: 2.5rem 2rem;              /* inner spacing */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* subtle shadow */
-  max-width: 400px;                  /* constrain width like Linktree */
-  margin: 2rem auto;                 /* center container on page */
-  border: 1px solid rgba(255,255,255,0.15); /* thin subtle grey line */
-  box-shadow: 0 4px 12px rgba(0,0,0,0.35);             /* depth against background */
+  background: rgba(17, 17, 17, 0.85);
+  color: #eee;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  max-width: 400px;
+  margin: 2rem auto;
+
+  /* default neutral border */
+  border: 1px solid rgba(255, 255, 255, 0.15);
+
+  /* depth */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
+/* Subtle Turtle Cove accent */
+body.turtles-page .landing-container {
+  border: 1px solid rgba(120, 180, 120, 0.35); /* soft green */
+  box-shadow:
+    0 6px 18px rgba(0, 0, 0, 0.45),
+    0 0 0 1px rgba(120, 180, 120, 0.15); /* faint glow */
+}
+
+/* Improve text readability over photos */
 .landing-container h2,
 .landing-container a,
 .landing-container p {
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
 }
 
-.landing-container a:not(.social-icons-inline a) {
-  display: block;
-  margin: 0.8rem auto;
-  padding: 1rem 2rem;
-  max-width: 260px;
-  text-align: center;
-  text-decoration: none;
-  color: #eee;            /* light text on dark background */
-  background: #222;       /* darker gray background for buttons */
-  border-radius: 10px;
-  transition: background 0.2s, transform 0.2s;
-  font-weight: 500;
-   font-size: 1.1rem;
-}
-
-.landing-container a:not(.social-icons-inline a):hover {
-  background: #333;        /* slightly lighter on hover */
-  transform: scale(1.02);
-}
-
-/* Logo at top */
+/* ================================
+   Logo
+   ================================ */
 .logo {
-  width: 120px;            /* desired width */
-  height: 120px;           /* make it square */
-  object-fit: cover;       /* scales image to fill box, crops if needed */
-  border-radius: 50%;      /* circular */
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 50%;
   margin-bottom: 1rem;
-  border: 3px solid #fff;  /* white border */
-  padding: 3px;            /* optional spacing between border and image */
+  border: 3px solid #fff;
+  padding: 3px;
 }
 
 /* ================================
-   Inline social icons under logo
+   Inline social icons
    ================================ */
-
-/* ================================
-   Inline social icons under logo
-   ================================ */
-
 .social-icons-inline {
   display: flex;
-  justify-content: center;   /* centers icons inside */
+  justify-content: center;
   align-items: center;
-  gap: 14px;                 /* spacing between icons */
-  margin: 1rem auto 1.5rem;  /* centers the container itself */
-  width: max-content;        /* shrink-wrap to icons */
+  gap: 14px;
+  margin: 1rem auto 1.5rem;
+  width: max-content;
 }
 
 .social-icons-inline a {
@@ -101,7 +89,7 @@ body.turtles-page {
   font-size: 32px;
   text-decoration: none;
   line-height: 1;
-  transition: transform 0.2s, opacity 0.2s;
+  transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .social-icons-inline a:hover {
@@ -109,7 +97,7 @@ body.turtles-page {
   opacity: 0.75;
 }
 
-/* Simple Icons SVG */
+/* Simple Icons SVG (Bluesky) */
 .social-svg {
   width: 32px;
   height: 32px;
@@ -117,14 +105,27 @@ body.turtles-page {
   filter: invert(1);
 }
 
-.social-icons-inline img {
-  width: 32px;
-  height: 32px;
-  transition: transform 0.2s;
+/* ================================
+   Buttons / Links
+   ================================ */
+.landing-container a:not(.social-icons-inline a) {
+  display: block;
+  margin: 0.8rem auto;
+  padding: 1rem 2rem;
+  max-width: 260px;
+  text-align: center;
+  text-decoration: none;
+  color: #eee;
+  background: #222;
+  border-radius: 10px;
+  font-weight: 500;
+  font-size: 1.1rem;
+  transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.social-icons-inline a:hover img {
-  transform: scale(1.1);
+.landing-container a:not(.social-icons-inline a):hover {
+  background: #333;
+  transform: scale(1.02);
 }
 
 /* ================================
@@ -133,7 +134,7 @@ body.turtles-page {
 h2 {
   margin-top: 2rem;
   font-size: 1.3rem;
-  color: #ccc;        /* lighter than main text for headings */
+  color: #ccc;
 }
 
 /* ================================
@@ -150,7 +151,7 @@ article p em {
 }
 
 /* ================================
-   Headings
+   General headings
    ================================ */
 h1 {
   font-size: 2rem;
@@ -158,9 +159,10 @@ h1 {
 }
 
 /* ================================
-   Responsive / desktop tweaks
+   Desktop tweaks
    ================================ */
 @media screen and (min-width: 1024px) {
   main {
     max-width: 720px;
   }
+}
