@@ -38,6 +38,8 @@ body.turtles-page {
   box-shadow: 0 4px 12px rgba(0,0,0,0.2); /* subtle shadow */
   max-width: 400px;                  /* constrain width like Linktree */
   margin: 2rem auto;                 /* center container on page */
+  border: 1px solid rgba(255,255,255,0.15); /* thin subtle grey line */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.35);             /* depth against background */
 }
 
 .landing-container h2,
