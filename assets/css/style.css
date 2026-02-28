@@ -19,7 +19,6 @@ main {
 /* ================================
    Turtle-specific page styling
    ================================ */
-
 body.turtles-page {
   background: url('/assets/images/turtle-background.jpg') no-repeat center center;
   background-size: cover;
@@ -36,20 +35,16 @@ body.turtles-page {
   padding: 2.5rem 2rem;
   max-width: 400px;
   margin: 2rem auto;
-
-  /* default neutral border */
   border: 1px solid rgba(255, 255, 255, 0.15);
-
-  /* depth */
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
 }
 
-/* Subtle Turtle Cove accent */
+/* Turtle Cove subtle green accent */
 body.turtles-page .landing-container {
-  border: 1px solid rgba(120, 180, 120, 0.35); /* soft green */
+  border: 1px solid rgba(120, 180, 120, 0.35); /* soft green border */
   box-shadow:
     0 6px 18px rgba(0, 0, 0, 0.45),
-    0 0 0 1px rgba(120, 180, 120, 0.15); /* faint glow */
+    0 0 0 1px rgba(120, 180, 120, 0.15); /* faint green glow */
 }
 
 /* Improve text readability over photos */
@@ -97,7 +92,7 @@ body.turtles-page .landing-container {
   opacity: 0.75;
 }
 
-/* Simple Icons SVG (Bluesky) */
+/* Simple Icons SVG */
 .social-svg {
   width: 32px;
   height: 32px;
@@ -118,13 +113,15 @@ body.turtles-page .landing-container {
   color: #eee;
   background: #222;
   border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.5); /* <-- thin white border added */
   font-weight: 500;
   font-size: 1.1rem;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: background 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
 }
 
 .landing-container a:not(.social-icons-inline a):hover {
   background: #333;
+  border-color: rgba(255, 255, 255, 0.85); /* brighten border on hover */
   transform: scale(1.02);
 }
 
@@ -165,15 +162,4 @@ h1 {
   main {
     max-width: 720px;
   }
-}
-
-.links a {
-  display: block;                 /* or inline-block */
-  padding: 0.75rem 1rem;
-  margin-bottom: 0.75rem;
-
-  border: 1px solid rgba(255, 255, 255, 0.8); /* thin white border */
-  border-radius: 8px;
-
-  text-decoration: none;
 }
