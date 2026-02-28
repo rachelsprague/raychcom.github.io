@@ -1,6 +1,7 @@
 ---
 layout: default
 title: Raych's Turtle Cove
+body_class: turtles-page
 ---
 
 <div class="landing-container">
