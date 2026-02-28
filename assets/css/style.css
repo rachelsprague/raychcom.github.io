@@ -114,7 +114,7 @@ body.turtles-page .landing-container {
   text-align: center;
   text-decoration: none;
   color: #eee;
-  background: #222;
+  background: #000;
   border-radius: 10px;
   border: 1px solid rgba(255, 255, 255, 0.5); /* <-- thin white border added */
   font-weight: 500;
