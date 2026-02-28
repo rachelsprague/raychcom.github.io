@@ -17,6 +17,17 @@ main {
 }
 
 /* ================================
+   Turtle-specific page styling
+   ================================ */
+
+/* Background for Turtle Cove page */
+body.turtles-page {
+  background: url('/assets/images/turtle-background.jpg') no-repeat center center;
+  background-size: cover;       /* fills the viewport */
+  background-attachment: fixed; /* optional, parallax effect */
+}
+
+/* ================================
    Landing page container
    ================================ */
 .landing-container {
