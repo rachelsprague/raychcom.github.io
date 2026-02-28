@@ -159,9 +159,16 @@ h1 {
     max-width: 720px;
   }
 
-  .landing-container {
-    max-width: 400px; /* slightly wider container on desktop */
-  }
+/* Semi-transparent main container */
+.landing-container {
+  background: rgba(17,17,17,0.85); /* 0.85 opacity black */
+  color: #eee;
+  border-radius: 20px;
+  padding: 2.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  max-width: 400px;
+  margin: 2rem auto;
+}
 
   .landing-container a:not(.social-icons-inline a) {
     padding: 1rem 2rem;
