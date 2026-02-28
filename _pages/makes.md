@@ -35,7 +35,7 @@ classes: wide
   <!-- Linktree buttons -->
   <div class="linktree-links">
     
-    <a class="btn btn--primary btn--large btn--block" href="https://turtles.raych.com" target="_blank" rel="noopener">
+    <a class="btn btn--primary btn--large btn--block" href="/turtles/" target="_blank" rel="noopener">
     🐢 Turtles 🐢
   </a>
   <a class="btn btn--primary btn--large btn--block" href="/" target="_blank" rel="noopener">
