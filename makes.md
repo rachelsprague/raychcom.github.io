@@ -36,8 +36,8 @@ body_class: makes-page
 
 
 
-  <!-- Hub text 
-  <div class="home-hub__text">
+  <!-- Hub text -->
+  <!-- <div class="home-hub__text">
     <p>I got a Cricut … and I’m kinda afraid to use it. Projects coming soon.</p>
-  </div> -->
+  </div>  -->
 
