@@ -41,7 +41,3 @@ body_class: makes-page
     <p>I got a Cricut … and I’m kinda afraid to use it. Projects coming soon.</p>
   </div> -->
 
-</div>
-
-
-
