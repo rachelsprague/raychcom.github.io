@@ -56,6 +56,11 @@ body.turtles-page .landing-container {
     0 0 0 1px rgba(120, 180, 120, 0.15); /* faint green glow */
 }
 
+/* makes landing container */
+body.turtles-page .landing-container {
+  background: rgba(16, 36, 60, .85);
+}
+
 /* Improve text readability over photos */
 .landing-container h2,
 .landing-container a,
