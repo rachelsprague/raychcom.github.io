@@ -28,6 +28,12 @@ body.home-page {
   background-attachment: fixed; /* optional parallax effect */
 }
 
+body.makes-page {
+  background: url('/assets/images/makes-background.png') no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed; /* optional parallax effect */
+}
+
 /* ================================
    Landing page container
    ================================ */
