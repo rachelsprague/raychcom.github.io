@@ -33,7 +33,7 @@
 
   <footer style="text-align:center; font-size:0.9rem; color:#555; margin-top:3rem;">
     &copy; {{ "now" | date: "%Y" }} {% if site.title %}{{ site.title }}{% else %}Raych{% endif %} · 
-    <a href="/privacy-policy" style="color:#555; text-decoration:underline;">Privacy Policy</a>
+    <a href="/privacy" style="color:#555; text-decoration:underline;">Privacy Policy</a>
   </footer>
   
 </body>
