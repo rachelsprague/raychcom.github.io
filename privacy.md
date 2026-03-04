@@ -1,3 +1,8 @@
+---
+layout: basic
+title: Privacy Policy
+---
+
 # Privacy Policy – Raych
 
 Effective Date: March 2026
