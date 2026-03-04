@@ -56,26 +56,26 @@ plugins:
   - jemoji
   - jekyll-include-cache
 
-author:
-  name   : Raych
-  avatar : "/assets/images/bio-photo.jpg"
-  bio    : "Hey, I’m Raych — playlist curator, data nerd, and turtle mom. I make things with code, spreadsheets, and curiosity. You’ll find music, side projects, and pets all over this space."
-  links:
-    - label: "raych.com"
-      icon: "fas fa-fw fa-link"
-      url: "https://www.raych.com"
-    - label: "GitHub"
-      icon: "fab fa-fw fa-github"
-      url: "https://github.com/raychcom"
-    - label: "Spotify"
-      icon: "fab fa-spotify"
-      url: "https://open.spotify.com/user/31ekhjd5x5qoyln7zo4zkv4tneay?si=0f0673a420cc4a29"
-    - label: "Twitch"
-      icon: "fab fa-twitch"
-      url: "https://www.twitch.tv/raych_com"
-    - label: "Bluesky"
-      icon: "fas fa-cloud"
-      url: "https://bsky.app/profile/raych.com"
+# author:
+#   name   : Raych
+#   avatar : "/assets/images/bio-photo.jpg"
+#   bio    : "Hey, I’m Raych — playlist curator, data nerd, and turtle mom. I make things with code, spreadsheets, and curiosity. You’ll find music, side projects, and pets all over this space."
+#   links:
+#     - label: "raych.com"
+#       icon: "fas fa-fw fa-link"
+#       url: "https://www.raych.com"
+#     - label: "GitHub"
+#       icon: "fab fa-fw fa-github"
+#       url: "https://github.com/raychcom"
+#     - label: "Spotify"
+#       icon: "fab fa-spotify"
+#       url: "https://open.spotify.com/user/31ekhjd5x5qoyln7zo4zkv4tneay?si=0f0673a420cc4a29"
+#     - label: "Twitch"
+#       icon: "fab fa-twitch"
+#       url: "https://www.twitch.tv/raych_com"
+#     - label: "Bluesky"
+#       icon: "fas fa-cloud"
+#       url: "https://bsky.app/profile/raych.com"
 
 footer:
   links:
