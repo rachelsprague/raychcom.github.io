@@ -31,8 +31,9 @@
     <p><a href="/">Back to Home</a></p>
   </main>
 
-  <footer style="text-align:center; margin-top:3rem; font-size:0.9rem; color:#666;">
-      © 2026 Raych. All rights reserved.
+  <footer style="text-align:center; font-size:0.9rem; color:#555; margin-top:3rem;">
+    &copy; {{ "now" | date: "%Y" }} {% if site.title %}{{ site.title }}{% else %}Raych{% endif %} · 
+    <a href="/privacy-policy" style="color:#555; text-decoration:underline;">Privacy Policy</a>
   </footer>
   
 </body>
