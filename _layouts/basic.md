@@ -1,6 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+
+    <!-- Google tag (gtag.js) -->
+  {% if jekyll.environment == "production" %}
+
+<script>
+  /* ---------------------------------
+    Raych personal-traffic detection
+  ---------------------------------- */
+
+  // change this for each site
+  const GA_ID = "G-JTQC9ZT68S";
+
+  /* check if this browser is marked as Raych */
+  const isRaych = document.cookie.includes("raychVisitor=true");
+
+  /* OPTIONAL: disable GA entirely for you */
+  if (isRaych) {
+  }
+
+  /* if not disabling, at least tag yourself */
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  if (isRaych) {
+    gtag('set', {
+      'user_properties': {
+        visitor_type: 'owner'
+      }
+    });
+  }
+  </script>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTQC9ZT68S"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-JTQC9ZT68S');
+  </script>
+  {% endif %}
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.title }}</title>
