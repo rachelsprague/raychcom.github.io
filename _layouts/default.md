@@ -20,7 +20,6 @@
 
   /* OPTIONAL: disable GA entirely for you */
   if (isRaych) {
-    window['ga-disable-' + GA_ID] = true;
   }
 
   /* if not disabling, at least tag yourself */
