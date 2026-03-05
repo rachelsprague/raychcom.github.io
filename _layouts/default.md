@@ -7,6 +7,35 @@
   <link rel="stylesheet" href="/assets/css/style.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
 
+  <script>
+  /* ---------------------------------
+    Raych personal-traffic detection
+  ---------------------------------- */
+
+  // change this for each site
+  const GA_ID = "G-JTQC9ZT68S";
+
+  /* check if this browser is marked as Raych */
+  const isRaych = document.cookie.includes("raychVisitor=true");
+
+  /* OPTIONAL: disable GA entirely for you */
+  if (isRaych) {
+    window['ga-disable-' + GA_ID] = true;
+  }
+
+  /* if not disabling, at least tag yourself */
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+
+  if (isRaych) {
+    gtag('set', {
+      'user_properties': {
+        visitor_type: 'owner'
+      }
+    });
+  }
+  </script>
+
   <!-- Google tag (gtag.js) -->
   {% if jekyll.environment == "production" %}
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTQC9ZT68S"></script>
