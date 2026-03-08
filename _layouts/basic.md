@@ -2,46 +2,44 @@
 <html lang="en">
   <head>
 
-    <!-- Google tag (gtag.js) -->
+  <!-- Google tag (gtag.js) -->
   {% if jekyll.environment == "production" %}
+  <script>
+    // Your GA Measurement ID
+    const GA_ID = "G-JTQC9ZT68S";
 
-<script>
-  /* ---------------------------------
-    Raych personal-traffic detection
-  ---------------------------------- */
+    // Detect if this is your browser (Raych)
+    // For simplicity, we check a cookie; fallback to false
+    const isRaych = document.cookie.includes("raychVisitor=true");
 
-  // change this for each site
-  const GA_ID = "G-JTQC9ZT68S";
+    // Initialize dataLayer
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
 
-  /* check if this browser is marked as Raych */
-  const isRaych = document.cookie.includes("raychVisitor=true");
-
-  /* OPTIONAL: disable GA entirely for you */
-  if (isRaych) {
-  }
-
-  /* if not disabling, at least tag yourself */
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-
-  if (isRaych) {
-    gtag('set', {
-      'user_properties': {
-        visitor_type: 'owner'
-      }
+    // Set traffic_type based on whether this is you
+    gtag('set', 'user_properties', {
+      traffic_type: isRaych ? 'owner' : 'user'
     });
-  }
+
+    // Optional: completely disable tracking for yourself
+    if (isRaych) {
+      window['ga-disable-' + GA_ID] = true; 
+    }
+
   </script>
 
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-JTQC9ZT68S"></script>
+  <!-- Load GA -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_ID }}"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
 
-    gtag('config', 'G-JTQC9ZT68S');
+    // Configure GA
+    gtag('config', '{{ GA_ID }}');
   </script>
   {% endif %}
+
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{{ page.title }}</title>
