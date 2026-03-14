@@ -86,11 +86,11 @@ async function updateNowPlaying() {
 
     const artist = track.artist["#text"];
     const title = track.name;
-    const art = track.image?.[2]?.["#text"] || "";
+    const art = track.image?.reverse().find(img => img["#text"])?.["#text"] || "";
     const isNowPlaying = track["@attr"]?.nowplaying === "true";
-
     const statusText = isNowPlaying ? "🎧 Now playing:" : "🎧 Last played:";
     const trackText = `${artist} — ${title}`;
+    const playCount = track.playcount ? track.playcount : (isNowPlaying ? 1 : 0);
 
     // timestamp if not currently playing
     let timestampText = "";
@@ -98,50 +98,33 @@ async function updateNowPlaying() {
       const playedTime = new Date(track.date.uts * 1000);
       const now = new Date();
       const diffMinutes = Math.floor((now - playedTime) / 60000);
-      if (diffMinutes < 60) timestampText = `scrobbled ${diffMinutes} min ago`;
-      else timestampText = `scrobbled ${Math.floor(diffMinutes/60)} hr ago`;
+      timestampText = diffMinutes < 60 ? `scrobbled ${diffMinutes} min ago` : `scrobbled ${Math.floor(diffMinutes/60)} hr ago`;
     }
 
     const musicBox = document.getElementById("music");
 
-    // fade out + slide down
+    // fade out
     musicBox.style.opacity = 0;
     musicBox.style.transform = "translateY(4px)";
 
     setTimeout(() => {
-    document.getElementById("track-status").textContent = statusText;
-    document.getElementById("track-name").textContent = trackText;
+      // render clickable album art + track info
+      musicBox.innerHTML = `
+        <a href="https://www.last.fm/user/${LASTFM_USER}" target="_blank" rel="noopener">
+          <img id="album-art" src="${art}" alt="${title} album art" />
+        </a>
+        <div>
+          <span id="track-status">${statusText}</span><br>
+          <span id="track-name">${trackText}</span>
+          <div id="track-playcount" style="font-size:0.8rem; opacity:0.7;">${playCount} plays</div>
+          <div id="track-timestamp" style="font-size:0.8rem; opacity:0.7;">${timestampText}</div>
+        </div>
+      `;
 
-    // add play count below track name
-    let playCountEl = document.getElementById("track-playcount");
-    if (!playCountEl) {
-      playCountEl = document.createElement("div");
-      playCountEl.id = "track-playcount";
-      playCountEl.style.fontSize = "0.8rem";
-      playCountEl.style.opacity = "0.7";
-      document.getElementById("music").appendChild(playCountEl);
-    }
-    const playCount = track.playcount || track["@attr"]?.nowplaying ? 1 : track.playcount || 0;
-    playCountEl.textContent = `${playCount} plays`;
-
-    // timestamp
-    if (timestampText) {
-      let tsEl = document.getElementById("track-timestamp");
-      if (!tsEl) {
-        tsEl = document.createElement("div");
-        tsEl.id = "track-timestamp";
-        tsEl.style.fontSize = "0.8rem";
-        tsEl.style.opacity = "0.7";
-        document.getElementById("music").appendChild(tsEl);
-      }
-      tsEl.textContent = timestampText;
-    }
-
-    // fade in + slide up
-    const musicBox = document.getElementById("music");
-    musicBox.style.opacity = 1;
-    musicBox.style.transform = "translateY(0)";
-  }, 300);
+      // fade in
+      musicBox.style.opacity = 1;
+      musicBox.style.transform = "translateY(0)";
+    }, 300);
 
   } catch {
     document.getElementById("track-status").textContent = "🎧 Music unavailable";
