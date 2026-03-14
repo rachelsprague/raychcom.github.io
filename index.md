@@ -106,7 +106,25 @@ body_class: home-page
       setTimeout(() => {
         document.getElementById("track-status").textContent = statusText;
         document.getElementById("track-name").textContent = trackText;
-        document.getElementById("album-art").src = art;
+
+      const albumArtEl = document.getElementById("album-art");
+      albumArtEl.src = art;
+
+      // wrap album art in Last.fm track link
+      const trackUrl = track.url; // Last.fm track URL
+      if (trackUrl) {
+        if (!albumArtEl.parentElement.href) {
+          const link = document.createElement("a");
+          link.href = trackUrl;
+          link.target = "_blank";
+          link.rel = "noopener";
+          albumArtEl.replaceWith(link);
+          link.appendChild(albumArtEl);
+        } else {
+          albumArtEl.parentElement.href = trackUrl;
+        }
+      }
+
         document.getElementById("track-timestamp").textContent = timestampText;
 
         // fade in + slide up
