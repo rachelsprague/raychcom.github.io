@@ -226,3 +226,62 @@ footer a:hover {
   height: 32px;
   border-radius: 4px;
 }
+
+/* ================================
+   NOW section
+   ================================ */
+
+.now-container {
+  margin: 1rem auto 1.6rem;
+  max-width: 260px;
+  padding: 12px 14px;
+
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+
+  backdrop-filter: blur(4px);
+}
+
+.now-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  opacity: 1;
+  transition: opacity .4s ease;
+  font-size: 0.95rem;
+}
+
+.now-item:last-child {
+  margin-bottom: 0;
+}
+
+#album-art {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+  transition: opacity .4s ease, transform .4s ease;
+}
+
+/* Twitch live pulse */
+#twitch-status.live {
+  color: #4ee44e; /* soft green to indicate live */
+  transition: transform 0.6s ease, box-shadow 0.6s ease;
+}
+
+#twitch-status.live:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 8px rgba(78, 228, 78, 0.6);
+  cursor: pointer;
+}
+
+/* Optional subtle animation even without hover */
+@keyframes twitchPulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
+  50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
+}
+
+#twitch-status.live.animate {
+  animation: twitchPulse 1.8s infinite ease-in-out;
+}
