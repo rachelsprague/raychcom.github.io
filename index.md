@@ -41,7 +41,7 @@ body_class: home-page
 
     <!-- Last.fm now playing -->
     <div class="now-item" id="music">
-      <img id="album-art" src="" alt="" />
+      <img id="album-art" src="" alt="Album art" />
       <div>
         <span id="track-status">Loading music…</span><br>
         <span id="track-name"></span>
@@ -65,116 +65,114 @@ body_class: home-page
      JS for Last.fm + Twitch Now Playing
 =============================== -->
 <script>
-  /* ================================
-     LAST.FM NOW PLAYING
-  ================================ */
-  const LASTFM_API_KEY = "362257f700e984e696cf0179e578e4f6";
-  const LASTFM_USER = "raych__";
-  const REFRESH_MS = 60000;
+const LASTFM_API_KEY = "362257f700e984e696cf0179e578e4f6";
+const LASTFM_USER = "raych__";
+const REFRESH_MS = 60000;
 
-  async function updateNowPlaying() {
-    try {
-      const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
-      const res = await fetch(url);
-      const data = await res.json();
-      const track = data?.recenttracks?.track?.[0];
-      if (!track) return;
+// ------------------------
+// Last.fm Now Playing
+// ------------------------
+async function updateNowPlaying() {
+  try {
+    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const track = data?.recenttracks?.track?.[0];
+    if (!track) return;
 
-      const artist = track.artist["#text"];
-      const title = track.name;
-      const art = track.image?.[2]?.["#text"] || "";
-      const isNowPlaying = track["@attr"]?.nowplaying === "true";
+    const artist = track.artist["#text"];
+    const title = track.name;
+    const art = track.image?.[2]?.["#text"] || "";
+    const isNowPlaying = track["@attr"]?.nowplaying === "true";
 
-      const statusText = isNowPlaying ? "🎧 Now playing:" : "🎧 Last played:";
-      const trackText = `${artist} — ${title}`;
+    const statusText = isNowPlaying ? "🎧 Now playing:" : "🎧 Last played:";
+    const trackText = `${artist} — ${title}`;
 
-      let timestampText = "";
-      if (!isNowPlaying && track.date?.uts) {
-        const playedTime = new Date(track.date.uts * 1000);
-        const now = new Date();
-        const diffMinutes = Math.floor((now - playedTime) / 60000);
-        if (diffMinutes < 60) timestampText = `scrobbled ${diffMinutes} min ago`;
-        else timestampText = `scrobbled ${Math.floor(diffMinutes/60)} hr ago`;
-      }
+    // timestamp if not currently playing
+    let timestampText = "";
+    if (!isNowPlaying && track.date?.uts) {
+      const playedTime = new Date(track.date.uts * 1000);
+      const now = new Date();
+      const diffMinutes = Math.floor((now - playedTime) / 60000);
+      if (diffMinutes < 60) timestampText = `scrobbled ${diffMinutes} min ago`;
+      else timestampText = `scrobbled ${Math.floor(diffMinutes/60)} hr ago`;
+    }
 
-      const musicBox = document.getElementById("music");
+    const musicBox = document.getElementById("music");
 
-      // fade out + slide down
-      musicBox.style.opacity = 0;
-      musicBox.style.transform = "translateY(4px)";
+    // fade out + slide down
+    musicBox.style.opacity = 0;
+    musicBox.style.transform = "translateY(4px)";
 
-      setTimeout(() => {
-        document.getElementById("track-status").textContent = statusText;
-        document.getElementById("track-name").textContent = trackText;
+    setTimeout(() => {
+      document.getElementById("track-status").textContent = statusText;
+      document.getElementById("track-name").textContent = trackText;
 
       const albumArtEl = document.getElementById("album-art");
       albumArtEl.src = art;
 
       // wrap album art in Last.fm track link
-      const trackUrl = track.url; // Last.fm track URL
-      if (trackUrl) {
+      if (track.url) {
         if (!albumArtEl.parentElement.href) {
           const link = document.createElement("a");
-          link.href = trackUrl;
+          link.href = track.url;
           link.target = "_blank";
           link.rel = "noopener";
           albumArtEl.replaceWith(link);
           link.appendChild(albumArtEl);
         } else {
-          albumArtEl.parentElement.href = trackUrl;
+          albumArtEl.parentElement.href = track.url;
         }
       }
 
-        document.getElementById("track-timestamp").textContent = timestampText;
+      // timestamp
+      let tsEl = document.getElementById("track-timestamp");
+      tsEl.textContent = timestampText;
 
-        // fade in + slide up
-        musicBox.style.opacity = 1;
-        musicBox.style.transform = "translateY(0)";
-      }, 300);
+      // fade in + slide up
+      musicBox.style.opacity = 1;
+      musicBox.style.transform = "translateY(0)";
+    }, 300);
 
-    } catch {
-      document.getElementById("track-status").textContent = "🎧 Music unavailable";
-      document.getElementById("track-name").textContent = "";
-      document.getElementById("track-timestamp").textContent = "";
-    }
+  } catch {
+    document.getElementById("track-status").textContent = "🎧 Music unavailable";
+    document.getElementById("track-name").textContent = "";
   }
+}
 
-  updateNowPlaying();
-  setInterval(updateNowPlaying, REFRESH_MS);
+updateNowPlaying();
+setInterval(updateNowPlaying, REFRESH_MS);
 
-  /* ================================
-     TWITCH STATUS
-  ================================ */
-  async function updateTwitchStatus() {
-    try {
-      const res = await fetch("https://decapi.me/twitch/uptime/raych_com");
-      const text = await res.text();
-      const el = document.getElementById("twitch-status");
+// ------------------------
+// Twitch Stream Status
+// ------------------------
+async function updateTwitchStatus() {
+  try {
+    const res = await fetch("https://decapi.me/twitch/uptime/raych_com");
+    const text = await res.text();
 
-      // fade out + slide down
-      el.style.opacity = 0;
-      el.style.transform = "translateY(4px)";
+    const el = document.getElementById("twitch-status");
+    el.style.opacity = 0;
+    el.style.transform = "translateY(4px)";
 
-      setTimeout(() => {
-        if (text.includes("offline")) {
-          el.textContent = "🐠 🐢 Aquarium stream offline";
-          el.classList.remove("live", "animate");
-        } else {
-          el.textContent = `🐠 🐢 Live on Twitch (${text})`;
-          el.classList.add("live", "animate");
-        }
+    setTimeout(() => {
+      if (text.includes("offline")) {
+        el.textContent = "🐠 🐢 Aquarium stream offline";
+        el.classList.remove("live", "animate");
+      } else {
+        el.textContent = `🐠 🐢 Live on Twitch (${text})`;
+        el.classList.add("live", "animate");
+      }
+      el.style.opacity = 1;
+      el.style.transform = "translateY(0)";
+    }, 300);
 
-        // fade in + slide up
-        el.style.opacity = 1;
-        el.style.transform = "translateY(0)";
-      }, 300);
-
-    } catch {
-      const el = document.getElementById("twitch-status");
-      el.textContent = "🐠 Stream status unavailable";
-    }
+  } catch {
+    const el = document.getElementById("twitch-status");
+    el.textContent = "🐠 Stream status unavailable";
   }
+}
 
-  updateTwitchStatus();
-  setInterval(updateTwitchStatus, 60000);
+updateTwitchStatus();
+setInterval(updateTwitchStatus, 60000);
 </script>
