@@ -119,7 +119,7 @@ async function updateNowPlaying() {
       const albumArtEl = document.getElementById("album-art");
       albumArtEl.src = art;
       albumArtEl.onclick = () => {
-        const trackUrl = `https://www.last.fm/user/${LASTFM_USER}/library/tracks`;
+        const trackUrl = infoData?.track?.url || `https://www.last.fm/user/${LASTFM_USER}/library/tracks`;
         window.open(trackUrl, "_blank");
       };
 
