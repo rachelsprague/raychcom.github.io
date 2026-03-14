@@ -217,7 +217,7 @@ footer a:hover {
   background: rgba(0,0,0,0.3);
   border-radius: 10px;
   border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.8rem 1rem;
+  padding: 0.8rem 2rem;
   text-align: left;
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
