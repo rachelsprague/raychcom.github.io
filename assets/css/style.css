@@ -200,3 +200,29 @@ footer a {
 footer a:hover {
   color: #222;
 }
+
+/* ================================
+   NOW section
+   ================================ */
+
+.now-container {
+  margin: 1rem auto 1.5rem;
+  text-align: left;
+  max-width: 260px;
+}
+
+.now-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  opacity: 1;
+  transition: opacity .4s ease;
+  font-size: 0.95rem;
+}
+
+#album-art {
+  width: 32px;
+  height: 32px;
+  border-radius: 4px;
+}

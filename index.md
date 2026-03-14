@@ -14,6 +14,9 @@ body_class: home-page
   <a href="https://open.spotify.com/user/31ekhjd5x5qoyln7zo4zkv4tneay" target="_blank" rel="noopener" aria-label="Spotify">
     <i class="fa-brands fa-spotify"></i>
   </a>
+  <a href="https://last.fm/user/raych__" target="_blank" rel="noopener" aria-label="Last.fm">
+    <i class="fa-brands fa-lastfm"></i>
+  </a>
   <a href="https://bsky.app/profile/raych.com" target="_blank" rel="noopener" aria-label="Bluesky">
     <img src="/assets/icons/bluesky.svg" alt="Bluesky" class="social-svg">
   </a>
@@ -26,6 +29,23 @@ body_class: home-page
   <a href="https://byraych.substack.com/" target="_blank" rel="noopener" aria-label="Substack">
     <i class="fa-solid fa-newspaper"></i>
   </a>
+</div>
+
+<!-- NOW -->
+<h2>Now</h2>
+
+<div class="now-container">
+  <div class="now-item" id="twitch-status">
+    🐢 Checking aquarium stream…
+  </div>
+
+  <div class="now-item" id="music">
+    <img id="album-art" src="" alt="" />
+    <div>
+      <span id="track-status">Loading music…</span><br>
+      <span id="track-name"></span>
+    </div>
+  </div>
 </div>
 
 
@@ -44,6 +64,111 @@ body_class: home-page
   <a href="https://www.kaggle.com/datasets" target="_blank">Kaggle Datasets</a> -->
 
 </div>
+
+<script>
+
+/* ================================
+   LAST.FM NOW PLAYING
+   ================================ */
+
+const LASTFM_API_KEY = "362257f700e984e696cf0179e578e4f6";
+const LASTFM_USER = "raych__";
+
+async function updateNowPlaying() {
+
+  try {
+
+    const url =
+      `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks` +
+      `&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+
+    const res = await fetch(url);
+    const data = await res.json();
+
+    const track = data?.recenttracks?.track?.[0];
+
+    if (!track) return;
+
+    const artist = track.artist["#text"];
+    const title = track.name;
+    const art = track.image?.[2]?.["#text"] || "";
+
+    const isNowPlaying = track["@attr"]?.nowplaying === "true";
+
+    const statusText = isNowPlaying
+      ? "🎧 Now playing:"
+      : "🎧 Last played:";
+
+    const trackText = `${artist} — ${title}`;
+
+    const musicBox = document.getElementById("music");
+
+    musicBox.style.opacity = 0;
+
+    setTimeout(() => {
+
+      document.getElementById("track-status").textContent = statusText;
+      document.getElementById("track-name").textContent = trackText;
+
+      if (art) {
+        document.getElementById("album-art").src = art;
+      }
+
+      musicBox.style.opacity = 1;
+
+    }, 300);
+
+  }
+
+  catch {
+
+    document.getElementById("track-status").textContent = "🎧 Music unavailable";
+
+  }
+
+}
+
+/* ================================
+   TWITCH STATUS
+   ================================ */
+
+async function updateTwitchStatus() {
+
+  try {
+
+    const res = await fetch("https://decapi.me/twitch/uptime/raych_com");
+    const text = await res.text();
+
+    const el = document.getElementById("twitch-status");
+
+    if (text.includes("offline")) {
+
+      el.textContent = "🐢 Aquarium stream offline";
+
+    } else {
+
+      el.innerHTML = `🐢 Live on Twitch (${text})`;
+
+    }
+
+  }
+
+  catch {
+
+    document.getElementById("twitch-status").textContent =
+      "🐢 Stream status unavailable";
+
+  }
+
+}
+
+updateNowPlaying();
+updateTwitchStatus();
+
+setInterval(updateNowPlaying, 60000);
+setInterval(updateTwitchStatus, 60000);
+
+</script>
 
 
 <!-- Hub text 
