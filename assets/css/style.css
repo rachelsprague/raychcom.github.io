@@ -1,13 +1,19 @@
 /* ================================
    General page styling
    ================================ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   font-family: system-ui, -apple-system, sans-serif;
   line-height: 1.6;
   margin: 0;
   padding: 2rem;
   text-align: center;
-  background: #f5f5f5;
+  background: #f5f5f5; /* fallback background */
 }
 
 /* Centered main container */
@@ -16,6 +22,7 @@ main {
   width: 100%;
 }
 
+/* Page-specific backgrounds */
 body.turtles-page {
   background: url('/assets/images/turtle-background.jpg') no-repeat center center;
   background-size: cover;
@@ -42,8 +49,7 @@ body.makes-page {
   color: #eee;
   border-radius: 20px;
   padding: 2.5rem 2rem;
-  max-width: 400px;  /* container width */
-  width: 90%;         /* responsive on mobile */
+  max-width: 400px;
   margin: 2rem auto;
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
@@ -57,11 +63,12 @@ body.turtles-page .landing-container {
     0 0 0 1px rgba(120, 180, 120, 0.15);
 }
 
+/* Makes page container */
 body.makes-page .landing-container {
-  background: rgba(16, 36, 60, .85);
+  background: rgba(16, 36, 60, 0.85);
 }
 
-/* Improve text readability over photos */
+/* Improve text readability */
 .landing-container h2,
 .landing-container a,
 .landing-container p {
@@ -106,6 +113,7 @@ body.makes-page .landing-container {
   opacity: 0.75;
 }
 
+/* Simple Icons SVG */
 .social-svg {
   width: 32px;
   height: 32px;
@@ -120,8 +128,8 @@ body.makes-page .landing-container {
   display: block;
   margin: 0.8rem auto;
   padding: 1rem 2rem;
-  width: 100%;             /* match container width */
-  max-width: 100%;         /* no overflow */
+  width: 100%;
+  max-width: 100%;
   text-align: center;
   text-decoration: none;
   color: #eee;
@@ -155,13 +163,14 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  width: 100%;
+  align-items: center;
   margin: 1rem auto 1.6rem;
+  width: 100%;
   padding: 12px 14px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 10px;
-  backdrop-filter: blur(6px);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  backdrop-filter: blur(4px);
 }
 
 .now-item {
@@ -178,7 +187,7 @@ h2 {
 
 #music {
   flex-direction: row;
-  cursor: pointer; /* clickable album art */
+  align-items: center;
 }
 
 #music img#album-art {
@@ -186,13 +195,20 @@ h2 {
   height: 48px;
   border-radius: 6px;
   object-fit: cover;
-  transition: opacity .4s ease, transform .4s ease;
+  cursor: pointer;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+#music div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
 }
 
 #track-timestamp {
   font-size: 0.8rem;
   opacity: 0.7;
-  margin-top: 0.2rem;
+  margin-top: 2px;
 }
 
 /* Twitch live pulse effect */
@@ -207,23 +223,48 @@ h2 {
   cursor: pointer;
 }
 
-/* Twitch pulse keyframes */
 @keyframes twitchPulse {
-  0%, 100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
-  50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
+  0%, 100% { box-shadow: 0 0 6px rgba(78, 228, 78, 0.4); }
+  50% { box-shadow: 0 0 12px rgba(78, 228, 78, 0.6); }
 }
 
 /* ================================
-   Responsive tweaks
+   Footer styling
+   ================================ */
+footer {
+  text-align: center;
+  font-size: 0.9rem;
+  color: #555;
+  margin-top: 3rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  background: transparent;
+}
+
+footer a {
+  color: #555;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+footer a:hover {
+  color: #222;
+}
+
+/* ================================
+   Mobile responsiveness
    ================================ */
 @media screen and (max-width: 480px) {
   .landing-container {
+    width: 90%;
     padding: 1.5rem 1rem;
   }
+
   .landing-container a:not(.social-icons-inline a),
   .now-item {
     font-size: 1rem;
   }
+
   #music img#album-art {
     width: 40px;
     height: 40px;
