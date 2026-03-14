@@ -270,3 +270,29 @@ footer a:hover {
     height: 40px;
   }
 }
+
+/* ================================
+   Last.fm widget mobile adjustment
+   ================================ */
+@media screen and (max-width: 480px) {
+  #music {
+    flex-direction: column; /* stack album art on top of text */
+    align-items: center;
+    gap: 8px; /* reduce spacing */
+    padding: 6px 8px; /* smaller padding for tight mobile look */
+  }
+
+  #music img#album-art {
+    width: 60px;   /* bigger on mobile */
+    height: 60px;
+    margin-bottom: 4px; /* space between image and text */
+  }
+
+  #music div {
+    text-align: center; /* center text under album art */
+  }
+
+  #track-status, #track-name, #track-timestamp {
+    font-size: 0.9rem; /* slightly bigger for readability */
+  }
+}
