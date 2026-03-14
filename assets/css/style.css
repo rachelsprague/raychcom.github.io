@@ -16,6 +16,7 @@ main {
   width: 100%;
 }
 
+/* Page-specific backgrounds */
 body.turtles-page {
   background: url('/assets/images/turtle-background.jpg') no-repeat center center;
   background-size: cover;
@@ -41,13 +42,17 @@ body.makes-page {
   background: rgba(17, 17, 17, 0.85);
   color: #eee;
   border-radius: 20px;
-  padding: 2.5rem 2rem;
+  padding: 2.5rem 1.5rem;
   max-width: 400px;
+  width: 90%; /* mobile-friendly */
   margin: 2rem auto;
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
+  text-align: center;
+  backdrop-filter: blur(2px);
 }
 
+/* Turtle Cove subtle green accent */
 body.turtles-page .landing-container {
   border: 1px solid rgba(120, 180, 120, 0.35);
   box-shadow:
@@ -55,10 +60,12 @@ body.turtles-page .landing-container {
     0 0 0 1px rgba(120, 180, 120, 0.15);
 }
 
+/* Makes landing container */
 body.makes-page .landing-container {
   background: rgba(16, 36, 60, 0.85);
 }
 
+/* Improve text readability over photos */
 .landing-container h2,
 .landing-container a,
 .landing-container p {
@@ -116,8 +123,9 @@ body.makes-page .landing-container {
 .landing-container a:not(.social-icons-inline a) {
   display: block;
   margin: 0.8rem auto;
-  padding: 1rem 2rem;
-  max-width: 260px;
+  padding: 1rem 1.2rem;
+  width: 100%;
+  max-width: 100%;
   text-align: center;
   text-decoration: none;
   color: #eee;
@@ -142,6 +150,96 @@ h2 {
   margin-top: 2rem;
   font-size: 1.3rem;
   color: #ccc;
+}
+
+/* ================================
+   NOW section
+   ================================ */
+.now-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  margin: 1rem auto 1.6rem;
+  padding: 12px 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  backdrop-filter: blur(6px); /* subtle blur */
+}
+
+.now-item {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  width: 100%;
+  padding: 1rem 1.2rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.now-item:last-child {
+  margin-bottom: 0;
+}
+
+/* Music album art */
+#music {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+}
+
+#album-art {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  object-fit: cover;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+/* Track info text */
+#music div {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+#track-status {
+  font-weight: 500;
+}
+
+#track-name {
+  font-weight: 400;
+}
+
+/* Timestamp below track name */
+#track-timestamp {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 2px;
+}
+
+/* Twitch live pulse effect */
+#twitch-status.live {
+  color: #4ee44e;
+  animation: twitchPulse 1.8s infinite ease-in-out;
+}
+
+#twitch-status.live:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 8px rgba(78, 228, 78, 0.6);
+  cursor: pointer;
+}
+
+/* Twitch pulse keyframes */
+@keyframes twitchPulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
+  50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
 }
 
 /* ================================
@@ -175,6 +273,26 @@ h1 {
 }
 
 /* ================================
+   Mobile tweaks
+   ================================ */
+@media screen and (max-width: 480px) {
+  .landing-container {
+    padding: 2rem 1rem;
+  }
+
+  .landing-container a:not(.social-icons-inline a),
+  .now-item {
+    font-size: 1rem;
+    padding: 0.9rem 1rem;
+  }
+
+  #album-art {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* ================================
    Footer styling
    ================================ */
 footer {
@@ -195,101 +313,4 @@ footer a {
 
 footer a:hover {
   color: #222;
-}
-
-/* ================================
-   NOW SECTION
-   ================================ */
-.now-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-  margin: 1.5rem auto;
-  max-width: 260px; /* same as link buttons */
-}
-
-.now-item {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-  width: 100%;
-  background: rgba(0,0,0,0.3);
-  border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.2);
-  padding: 0.8rem 2rem;
-  text-align: left;
-  transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.now-item-link {
-  text-decoration: none;
-  width: 100%;
-}
-
-.now-item-link .now-item {
-  cursor: pointer;
-}
-
-/* Twitch status styling */
-#twitch-status {
-  justify-content: center;
-  font-weight: 500;
-  font-size: 1rem;
-  color: #eee;
-}
-
-/* Last.fm music box */
-#music {
-  justify-content: flex-start;
-}
-
-/* Album art */
-#album-art {
-  width: 48px;
-  height: 48px;
-  border-radius: 6px;
-  object-fit: cover;
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease, opacity 0.3s ease;
-}
-
-#album-art:hover {
-  transform: scale(1.05);
-}
-
-/* Track info container */
-#music > div {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  font-size: 0.95rem;
-  color: #eee;
-  line-height: 1.2;
-}
-
-/* Track timestamp */
-#track-timestamp {
-  margin-top: 2px;
-  font-size: 0.8rem;
-  color: #ccc;
-  opacity: 0.8;
-}
-
-/* Twitch live pulse effect */
-#twitch-status.live.animate {
-  color: #4ee44e;
-  animation: twitchPulse 1.8s infinite ease-in-out;
-}
-
-#twitch-status.live.animate:hover {
-  transform: scale(1.03);
-  box-shadow: 0 0 8px rgba(78, 228, 78, 0.6);
-  cursor: pointer;
-}
-
-@keyframes twitchPulse {
-  0%, 100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
-  50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
 }
