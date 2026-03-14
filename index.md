@@ -109,34 +109,39 @@ async function updateNowPlaying() {
     musicBox.style.transform = "translateY(4px)";
 
     setTimeout(() => {
-      document.getElementById("track-status").textContent = statusText;
-      document.getElementById("track-name").textContent = trackText;
+    document.getElementById("track-status").textContent = statusText;
+    document.getElementById("track-name").textContent = trackText;
 
-      const albumArtEl = document.getElementById("album-art");
-      albumArtEl.src = art;
+    // add play count below track name
+    let playCountEl = document.getElementById("track-playcount");
+    if (!playCountEl) {
+      playCountEl = document.createElement("div");
+      playCountEl.id = "track-playcount";
+      playCountEl.style.fontSize = "0.8rem";
+      playCountEl.style.opacity = "0.7";
+      document.getElementById("music").appendChild(playCountEl);
+    }
+    const playCount = track.playcount || track["@attr"]?.nowplaying ? 1 : track.playcount || 0;
+    playCountEl.textContent = `${playCount} plays`;
 
-      // wrap album art in Last.fm track link
-      if (track.url) {
-        if (!albumArtEl.parentElement.href) {
-          const link = document.createElement("a");
-          link.href = track.url;
-          link.target = "_blank";
-          link.rel = "noopener";
-          albumArtEl.replaceWith(link);
-          link.appendChild(albumArtEl);
-        } else {
-          albumArtEl.parentElement.href = track.url;
-        }
-      }
-
-      // timestamp
+    // timestamp
+    if (timestampText) {
       let tsEl = document.getElementById("track-timestamp");
+      if (!tsEl) {
+        tsEl = document.createElement("div");
+        tsEl.id = "track-timestamp";
+        tsEl.style.fontSize = "0.8rem";
+        tsEl.style.opacity = "0.7";
+        document.getElementById("music").appendChild(tsEl);
+      }
       tsEl.textContent = timestampText;
+    }
 
-      // fade in + slide up
-      musicBox.style.opacity = 1;
-      musicBox.style.transform = "translateY(0)";
-    }, 300);
+    // fade in + slide up
+    const musicBox = document.getElementById("music");
+    musicBox.style.opacity = 1;
+    musicBox.style.transform = "translateY(0)";
+  }, 300);
 
   } catch {
     document.getElementById("track-status").textContent = "🎧 Music unavailable";
