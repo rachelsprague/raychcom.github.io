@@ -1,4 +1,4 @@
-  ---
+---
 layout: default
 title: Raych
 body_class: home-page
