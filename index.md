@@ -44,9 +44,9 @@ body_class: home-page
     <!-- Last.fm now playing -->
     <a href="https://www.last.fm/user/raych__" target="_blank" rel="noopener" class="now-item-link">
     <div class="now-item" id="music">
+      <span id="track-status">Loading music…</span>
       <img id="album-art" src="" alt="Album art" />
       <div>
-        <span id="track-status">Loading music…</span><br>
         <span id="track-name"></span>
         <div id="track-timestamp" style="font-size:0.8rem; opacity:0.7;"></div>
       </div>
