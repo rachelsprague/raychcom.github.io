@@ -1,4 +1,4 @@
----
+  ---
 layout: default
 title: Raych
 body_class: home-page
@@ -51,8 +51,8 @@ body_class: home-page
         <div id="track-timestamp" style="font-size:0.8rem; opacity:0.7;"></div>
       </div>
     </div>
+    </a>
   </div>
-  </a>
 
   <!-- Links Section -->
   <h2>Links</h2>
