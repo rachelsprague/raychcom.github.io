@@ -71,57 +71,96 @@ body_class: home-page
 <script>
 const LASTFM_API_KEY = "362257f700e984e696cf0179e578e4f6";
 const LASTFM_USER = "raych__";
-const REFRESH_MS = 60000;
+const REFRESH_MS = 60000; // refresh every 60s
 
 // ------------------------
 // Last.fm Now Playing
 // ------------------------
 async function updateNowPlaying() {
   try {
-    const url = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
-    const res = await fetch(url);
+    // Get the most recent track
+    const recentUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
+    const res = await fetch(recentUrl);
     const data = await res.json();
     const track = data?.recenttracks?.track?.[0];
     if (!track) return;
 
     const artist = track.artist["#text"];
     const title = track.name;
-    const art = track.image?.reverse().find(img => img["#text"])?.["#text"] || "";
+    const art = track.image?.[2]?.["#text"] || "";
     const isNowPlaying = track["@attr"]?.nowplaying === "true";
+
     const statusText = isNowPlaying ? "🎧 Now playing:" : "🎧 Last played:";
     const trackText = `${artist} — ${title}`;
-    const playCount = track.playcount ? track.playcount : (isNowPlaying ? 1 : 0);
 
-    // timestamp if not currently playing
+    // Timestamp if not currently playing
     let timestampText = "";
     if (!isNowPlaying && track.date?.uts) {
       const playedTime = new Date(track.date.uts * 1000);
       const now = new Date();
       const diffMinutes = Math.floor((now - playedTime) / 60000);
-      timestampText = diffMinutes < 60 ? `scrobbled ${diffMinutes} min ago` : `scrobbled ${Math.floor(diffMinutes/60)} hr ago`;
+      timestampText = diffMinutes < 60
+        ? `scrobbled ${diffMinutes} min ago`
+        : `scrobbled ${Math.floor(diffMinutes/60)} hr ago`;
     }
 
     const musicBox = document.getElementById("music");
 
-    // fade out
+    // Fade out for smooth update
     musicBox.style.opacity = 0;
     musicBox.style.transform = "translateY(4px)";
 
-    setTimeout(() => {
-      // render clickable album art + track info
-      musicBox.innerHTML = `
-        <a href="https://www.last.fm/user/${LASTFM_USER}" target="_blank" rel="noopener">
-          <img id="album-art" src="${art}" alt="${title} album art" />
-        </a>
-        <div>
-          <span id="track-status">${statusText}</span><br>
-          <span id="track-name">${trackText}</span>
-          <div id="track-playcount" style="font-size:0.8rem; opacity:0.7;">${playCount} plays</div>
-          <div id="track-timestamp" style="font-size:0.8rem; opacity:0.7;">${timestampText}</div>
-        </div>
-      `;
+    setTimeout(async () => {
+      // Update text
+      document.getElementById("track-status").textContent = statusText;
+      document.getElementById("track-name").textContent = trackText;
 
-      // fade in
+      // Update album art (clickable link to track on Last.fm)
+      const albumArtEl = document.getElementById("album-art");
+      albumArtEl.src = art;
+      albumArtEl.onclick = () => {
+        const trackUrl = `https://www.last.fm/user/${LASTFM_USER}/library/tracks`;
+        window.open(trackUrl, "_blank");
+      };
+
+      // ------------------------
+      // Fetch correct play count
+      // ------------------------
+      const trackInfoUrl = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${LASTFM_API_KEY}&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(title)}&user=${LASTFM_USER}&format=json`;
+      try {
+        const infoRes = await fetch(trackInfoUrl);
+        const infoData = await infoRes.json();
+        const userPlayCount = infoData?.track?.userplaycount || 1;
+
+        let playCountEl = document.getElementById("track-playcount");
+        if (!playCountEl) {
+          playCountEl = document.createElement("div");
+          playCountEl.id = "track-playcount";
+          playCountEl.style.fontSize = "0.8rem";
+          playCountEl.style.opacity = "0.7";
+          musicBox.appendChild(playCountEl);
+        }
+        playCountEl.textContent = `${userPlayCount} plays`;
+      } catch {
+        // fallback if info fetch fails
+        let playCountEl = document.getElementById("track-playcount");
+        if (playCountEl) playCountEl.textContent = "";
+      }
+
+      // Timestamp
+      if (timestampText) {
+        let tsEl = document.getElementById("track-timestamp");
+        if (!tsEl) {
+          tsEl = document.createElement("div");
+          tsEl.id = "track-timestamp";
+          tsEl.style.fontSize = "0.8rem";
+          tsEl.style.opacity = "0.7";
+          musicBox.appendChild(tsEl);
+        }
+        tsEl.textContent = timestampText;
+      }
+
+      // Fade in
       musicBox.style.opacity = 1;
       musicBox.style.transform = "translateY(0)";
     }, 300);
@@ -129,6 +168,8 @@ async function updateNowPlaying() {
   } catch {
     document.getElementById("track-status").textContent = "🎧 Music unavailable";
     document.getElementById("track-name").textContent = "";
+    const albumArtEl = document.getElementById("album-art");
+    albumArtEl.src = "";
   }
 }
 
@@ -149,10 +190,10 @@ async function updateTwitchStatus() {
 
     setTimeout(() => {
       if (text.includes("offline")) {
-        el.textContent = "🐠 🐢 Aquarium stream offline";
+        el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Aquarium stream offline</a>`;
         el.classList.remove("live", "animate");
       } else {
-        el.textContent = `🐠 🐢 Live on Twitch (${text})`;
+        el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Live on Twitch (${text})</a>`;
         el.classList.add("live", "animate");
       }
       el.style.opacity = 1;
