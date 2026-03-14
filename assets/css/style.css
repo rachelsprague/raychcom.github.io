@@ -179,8 +179,21 @@ h2 {
 
 /* clickable wrapper */
 .now-item-link {
+  display: block;
   width: 100%;
   text-decoration: none;
+  cursor: pointer;
+}
+
+.now-item-link,
+.now-item-link:visited,
+.now-item-link:hover,
+.now-item-link:active {
+  color: inherit;
+}
+
+.now-item-link * {
+  color: inherit;
 }
 
 /* card */
