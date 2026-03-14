@@ -7,7 +7,7 @@ body {
   margin: 0;
   padding: 2rem;
   text-align: center;
-  background: #f5f5f5; /* fallback background */
+  background: #f5f5f5;
 }
 
 /* Centered main container */
@@ -16,7 +16,6 @@ main {
   width: 100%;
 }
 
-/* Page-specific backgrounds */
 body.turtles-page {
   background: url('/assets/images/turtle-background.jpg') no-repeat center center;
   background-size: cover;
@@ -42,14 +41,12 @@ body.makes-page {
   background: rgba(17, 17, 17, 0.85);
   color: #eee;
   border-radius: 20px;
-  padding: 2.5rem 1.5rem;
-  max-width: 400px;
-  width: 90%; /* mobile-friendly */
+  padding: 2.5rem 2rem;
+  max-width: 400px;  /* container width */
+  width: 90%;         /* responsive on mobile */
   margin: 2rem auto;
   border: 1px solid rgba(255, 255, 255, 0.15);
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.4);
-  text-align: center;
-  backdrop-filter: blur(2px);
 }
 
 /* Turtle Cove subtle green accent */
@@ -60,9 +57,8 @@ body.turtles-page .landing-container {
     0 0 0 1px rgba(120, 180, 120, 0.15);
 }
 
-/* Makes landing container */
 body.makes-page .landing-container {
-  background: rgba(16, 36, 60, 0.85);
+  background: rgba(16, 36, 60, .85);
 }
 
 /* Improve text readability over photos */
@@ -123,9 +119,9 @@ body.makes-page .landing-container {
 .landing-container a:not(.social-icons-inline a) {
   display: block;
   margin: 0.8rem auto;
-  padding: 1rem 1.2rem;
-  width: 100%;
-  max-width: 100%;
+  padding: 1rem 2rem;
+  width: 100%;             /* match container width */
+  max-width: 100%;         /* no overflow */
   text-align: center;
   text-decoration: none;
   color: #eee;
@@ -159,69 +155,44 @@ h2 {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
-  align-items: center;
   width: 100%;
-  max-width: 100%;
   margin: 1rem auto 1.6rem;
   padding: 12px 14px;
   background: rgba(255,255,255,0.04);
   border: 1px solid rgba(255,255,255,0.15);
   border-radius: 10px;
-  backdrop-filter: blur(6px); /* subtle blur */
+  backdrop-filter: blur(6px);
 }
 
 .now-item {
   display: flex;
   align-items: center;
   gap: 0.8rem;
+  padding: 0.8rem 1rem;
   width: 100%;
-  padding: 1rem 1.2rem;
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
   text-align: left;
   transition: all 0.3s ease;
 }
 
-.now-item:last-child {
-  margin-bottom: 0;
-}
-
-/* Music album art */
 #music {
   flex-direction: row;
-  align-items: center;
-  justify-content: flex-start;
-  cursor: pointer;
+  cursor: pointer; /* clickable album art */
 }
 
-#album-art {
+#music img#album-art {
   width: 48px;
   height: 48px;
   border-radius: 6px;
   object-fit: cover;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity .4s ease, transform .4s ease;
 }
 
-/* Track info text */
-#music div {
-  display: flex;
-  flex-direction: column;
-  text-align: left;
-}
-
-#track-status {
-  font-weight: 500;
-}
-
-#track-name {
-  font-weight: 400;
-}
-
-/* Timestamp below track name */
 #track-timestamp {
   font-size: 0.8rem;
   opacity: 0.7;
-  margin-top: 2px;
+  margin-top: 0.2rem;
 }
 
 /* Twitch live pulse effect */
@@ -243,74 +214,18 @@ h2 {
 }
 
 /* ================================
-   Blog / Article pages
-   ================================ */
-article h1 {
-  font-size: 1.8rem;
-  margin-bottom: 0.5rem;
-}
-
-article p em {
-  color: #aaa;
-  font-size: 0.9rem;
-}
-
-/* ================================
-   General headings
-   ================================ */
-h1 {
-  font-size: 2rem;
-  margin-bottom: 1.5rem;
-}
-
-/* ================================
-   Desktop tweaks
-   ================================ */
-@media screen and (min-width: 1024px) {
-  main {
-    max-width: 720px;
-  }
-}
-
-/* ================================
-   Mobile tweaks
+   Responsive tweaks
    ================================ */
 @media screen and (max-width: 480px) {
   .landing-container {
-    padding: 2rem 1rem;
+    padding: 1.5rem 1rem;
   }
-
   .landing-container a:not(.social-icons-inline a),
   .now-item {
     font-size: 1rem;
-    padding: 0.9rem 1rem;
   }
-
-  #album-art {
+  #music img#album-art {
     width: 40px;
     height: 40px;
   }
-}
-
-/* ================================
-   Footer styling
-   ================================ */
-footer {
-  text-align: center;
-  font-size: 0.9rem;
-  color: #555;
-  margin-top: 3rem;
-  padding: 1.5rem 0;
-  border-top: 1px solid rgba(0,0,0,0.05);
-  background: transparent;
-}
-
-footer a {
-  color: #555;
-  text-decoration: underline;
-  transition: color 0.2s ease;
-}
-
-footer a:hover {
-  color: #222;
 }
