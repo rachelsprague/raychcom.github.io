@@ -209,21 +209,17 @@ footer a:hover {
   max-width: 260px; /* same as link buttons */
 }
 
-.now-container {
+.now-item {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: 1rem;
-  margin: 1.5rem auto;
-  max-width: 260px; /* same as link buttons */
-  
-  /* blur & background */
-  background: rgba(0,0,0,0.25);  /* semi-transparent */
-  border-radius: 12px;
-  padding: 2rem;
-  backdrop-filter: blur(6px);  /* subtle blur */
-  -webkit-backdrop-filter: blur(6px); /* Safari */
-  border: 1px solid rgba(255,255,255,0.15);
+  gap: 0.8rem;
+  width: 100%;
+  background: rgba(0,0,0,0.3);
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  padding: 0.8rem 2rem;
+  text-align: left;
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 /* Twitch status styling */
