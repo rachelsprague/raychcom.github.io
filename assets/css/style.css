@@ -222,6 +222,15 @@ footer a:hover {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
+.now-item-link {
+  text-decoration: none;
+  width: 100%;
+}
+
+.now-item-link .now-item {
+  cursor: pointer;
+}
+
 /* Twitch status styling */
 #twitch-status {
   justify-content: center;

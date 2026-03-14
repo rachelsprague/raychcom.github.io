@@ -35,11 +35,14 @@ body_class: home-page
   <h2>Now</h2>
   <div class="now-container">
     <!-- Twitch status -->
+    <a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener" class="now-item-link">
     <div class="now-item" id="twitch-status">
       🐠 🐢 Checking aquarium stream…
     </div>
+    </a>
 
     <!-- Last.fm now playing -->
+    <a href="https://www.last.fm/user/raych__" target="_blank" rel="noopener" class="now-item-link">
     <div class="now-item" id="music">
       <img id="album-art" src="" alt="Album art" />
       <div>
@@ -49,6 +52,7 @@ body_class: home-page
       </div>
     </div>
   </div>
+  </a>
 
   <!-- Links Section -->
   <h2>Links</h2>
