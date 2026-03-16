@@ -214,7 +214,7 @@ h2 {
 }
 
 .now-item:hover {
-  transform: translateY(-2px);
+  transform: translateY(-2px) scale(1.01);
   border-color: rgba(255,255,255,0.35);
 }
 
@@ -322,4 +322,15 @@ footer a:hover {
     height: 64px;
   }
 
+}
+
+/* Music playing pulse */
+#music.playing {
+  border-color: rgba(120, 170, 255, 0.6);
+  animation: musicPulse 2s infinite ease-in-out;
+}
+
+@keyframes musicPulse {
+  0%,100% { box-shadow: 0 0 6px rgba(120,170,255,0.35); }
+  50% { box-shadow: 0 0 14px rgba(120,170,255,0.6); }
 }
