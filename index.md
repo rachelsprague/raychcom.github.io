@@ -93,14 +93,6 @@ async function updateNowPlaying() {
     const statusText = isNowPlaying ? "🎧 Now playing:" : "🎧 Last played:";
     const trackText = `${artist} — ${title}`;
 
-    const musicBox = document.getElementById("music");
-
-    if (isNowPlaying) {
-      musicBox.classList.add("playing");
-    } else {
-      musicBox.classList.remove("playing");
-    }
-
     // Timestamp if not currently playing
     let timestampText = "";
     if (!isNowPlaying && track.date?.uts) {
@@ -113,6 +105,12 @@ async function updateNowPlaying() {
     }
 
     const musicBox = document.getElementById("music");
+
+    if (isNowPlaying) {
+      musicBox.classList.add("playing");
+    } else {
+      musicBox.classList.remove("playing");
+    }
 
     // Fade out for smooth update
     musicBox.style.opacity = 0;
