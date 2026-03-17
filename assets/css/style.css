@@ -182,7 +182,7 @@ h2 {
 #twitch-status {
   background: rgba(255, 255, 255, 0.05);
   border-radius: 12px;
-  padding: 0.8rem 1rem;
+  padding: 0.9rem 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -192,6 +192,8 @@ h2 {
   font-weight: normal;
   color: #eee;
   transition: all 0.25s ease;
+  width: 100%;
+  max-width: 400px; /* optional for desktop cards */
 }
 
 /* Hover effect for cards */
@@ -210,10 +212,11 @@ h2 {
 #twitch-status a:visited,
 #twitch-status a:hover {
   display: flex;
-  flex-direction: column;
+  flex-direction: row; /* horizontal layout for text + timestamp/duration */
+  align-items: center;
+  justify-content: space-between;
   color: inherit;
   text-decoration: none;
-  line-height: 1.3;
   width: 100%;
 }
 
@@ -227,6 +230,7 @@ h2 {
   object-fit: cover;
   cursor: pointer;
   transition: opacity 0.35s ease, transform 0.35s ease;
+  flex-shrink: 0;
 }
 
 #music img#album-art:hover {
@@ -236,12 +240,13 @@ h2 {
 /* -------------------------------
    Text block inside cards
 ------------------------------- */
-#music div,
-#twitch-status div {
+#music div.text-block,
+#twitch-status div.text-block {
   display: flex;
   flex-direction: column;
-  line-height: 1.3;
+  gap: 2px;
   color: inherit;
+  flex-grow: 1;
 }
 
 /* -------------------------------
@@ -252,7 +257,8 @@ h2 {
   font-size: 0.8rem;
   opacity: 0.7;
   font-weight: normal;
-  margin-left: auto; /* pushes Twitch duration to right */
+  margin-left: auto;
+  white-space: nowrap;
 }
 
 /* -------------------------------
@@ -320,8 +326,8 @@ footer a:hover {
     padding: 0.7rem 0.8rem;
   }
 
-  #music div,
-  #twitch-status a {
+  #music div.text-block,
+  #twitch-status div.text-block {
     text-align: center;
   }
 
