@@ -174,96 +174,67 @@ h2 {
   -webkit-backdrop-filter: blur(6px);
 }
 
-/* -------------------------------
-   NOW card base (Last.fm + Twitch)
-------------------------------- */
-.now-item,
-#music,
-#twitch-status {
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 12px;
-  padding: 0.9rem 1rem;
+/* ================================
+   NOW card base
+=============================== */
+.now-item {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.6rem;
-  text-align: left;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #eee;
   font-size: 0.9rem;
   font-weight: normal;
-  color: #eee;
   transition: all 0.25s ease;
-  width: 100%;
-  max-width: 400px; /* optional for desktop cards */
 }
 
-/* Hover effect for cards */
-.now-item:hover,
-#music:hover,
-#twitch-status:hover {
+.now-item:hover {
   transform: translateY(-2px) scale(1.01);
   border-color: rgba(255,255,255,0.35);
 }
 
-/* -------------------------------
-   Clickable links inside cards
-------------------------------- */
-.now-item-link,
-#twitch-status a,
-#twitch-status a:visited,
-#twitch-status a:hover {
+/* ================================
+   Text block inside cards
+=============================== */
+.text-block {
   display: flex;
-  flex-direction: row; /* horizontal layout for text + timestamp/duration */
-  align-items: center;
-  justify-content: space-between;
-  color: inherit;
-  text-decoration: none;
-  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.3;
+  flex: 1; /* expand to fill horizontal space */
 }
 
-/* -------------------------------
-   Last.fm album art
-------------------------------- */
+/* Last.fm album art */
 #music img#album-art {
   width: 72px;
   height: 72px;
   border-radius: 8px;
   object-fit: cover;
   cursor: pointer;
-  transition: opacity 0.35s ease, transform 0.35s ease;
-  flex-shrink: 0;
+  transition: transform 0.35s ease;
 }
 
 #music img#album-art:hover {
   transform: scale(1.05);
 }
 
-/* -------------------------------
-   Text block inside cards
-------------------------------- */
-#music div.text-block,
-#twitch-status div.text-block {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-  color: inherit;
-  flex-grow: 1;
-}
-
-/* -------------------------------
-   Timestamp / duration styling
-------------------------------- */
+/* Timestamp / duration styling */
 #track-timestamp,
 #twitch-status .duration {
   font-size: 0.8rem;
   opacity: 0.7;
   font-weight: normal;
-  margin-left: auto;
-  white-space: nowrap;
+  margin-top: 2px;
+  margin-left: 0;
 }
 
-/* -------------------------------
+/* ================================
    Pulse animations
-------------------------------- */
+=============================== */
 #music.playing {
   animation: musicPulse 2s infinite ease-in-out;
   border-color: rgba(120, 170, 255, 0.6);
@@ -282,6 +253,125 @@ h2 {
 @keyframes twitchPulse {
   0%,100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
   50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media screen and (max-width: 480px) {
+  .now-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .text-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  #music img#album-art {
+    width: 64px;
+    height: 64px;
+  }
+}
+
+/* ================================
+   NOW card base
+=============================== */
+.now-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.8rem 1rem;
+  background: rgba(255,255,255,0.05);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: #eee;
+  font-size: 0.9rem;
+  font-weight: normal;
+  transition: all 0.25s ease;
+}
+
+.now-item:hover {
+  transform: translateY(-2px) scale(1.01);
+  border-color: rgba(255,255,255,0.35);
+}
+
+/* ================================
+   Text block inside cards
+=============================== */
+.text-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  line-height: 1.3;
+  flex: 1; /* expand to fill horizontal space */
+}
+
+/* Last.fm album art */
+#music img#album-art {
+  width: 72px;
+  height: 72px;
+  border-radius: 8px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.35s ease;
+}
+
+#music img#album-art:hover {
+  transform: scale(1.05);
+}
+
+/* Timestamp / duration styling */
+#track-timestamp,
+#twitch-status .duration {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  font-weight: normal;
+  margin-top: 2px;
+  margin-left: 0;
+}
+
+/* ================================
+   Pulse animations
+=============================== */
+#music.playing {
+  animation: musicPulse 2s infinite ease-in-out;
+  border-color: rgba(120, 170, 255, 0.6);
+}
+
+#twitch-status.live {
+  animation: twitchPulse 1.8s infinite ease-in-out;
+  border-color: rgba(78, 228, 78, 0.6);
+}
+
+@keyframes musicPulse {
+  0%,100% { box-shadow: 0 0 6px rgba(120,170,255,0.35); }
+  50% { box-shadow: 0 0 14px rgba(120,170,255,0.6); }
+}
+
+@keyframes twitchPulse {
+  0%,100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
+  50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
+}
+
+/* Responsive: stack cards vertically on small screens */
+@media screen and (max-width: 480px) {
+  .now-item {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+  }
+
+  .text-block {
+    align-items: center;
+    text-align: center;
+  }
+
+  #music img#album-art {
+    width: 64px;
+    height: 64px;
+  }
 }
 
 /* ================================
@@ -305,34 +395,4 @@ footer a {
 
 footer a:hover {
   color: #222;
-}
-
-/* -------------------------------
-   Mobile adjustments
-------------------------------- */
-@media screen and (max-width: 480px) {
-
-  #music img#album-art {
-    width: 64px;
-    height: 64px;
-  }
-
-  .now-item,
-  #music,
-  #twitch-status {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.45rem;
-    padding: 0.7rem 0.8rem;
-  }
-
-  #music div.text-block,
-  #twitch-status div.text-block {
-    text-align: center;
-  }
-
-  #track-timestamp,
-  #twitch-status .duration {
-    font-size: 0.8rem;
-  }
 }

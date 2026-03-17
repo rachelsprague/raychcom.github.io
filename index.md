@@ -34,24 +34,24 @@ body_class: home-page
   <!-- NOW Section -->
   <h2>Now</h2>
   <div class="now-container">
-    <!-- Twitch status -->
-    <a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener" class="now-item-link">
-    <div class="now-item" id="twitch-status">
-      🐠 🐢 Checking aquarium stream…
-    </div>
-    </a>
-
-    <!-- Last.fm now playing -->
-    <a href="https://www.last.fm/user/raych__" target="_blank" rel="noopener" class="now-item-link">
-    <div class="now-item" id="music">
-      <span id="track-status">Loading music…</span>
-      <img id="album-art" src="" alt="Album art" />
-      <div>
-        <span id="track-name"></span>
-        <div id="track-timestamp" style="font-size:0.8rem; opacity:0.7;"></div>
+    <!-- Twitch NOW card -->
+    <div id="twitch-status" class="now-item">
+      <div class="text-block">
+        <div id="twitch-text">🐠 🐢 Checking aquarium stream...</div>
+        <div class="duration"></div>
       </div>
     </div>
-    </a>
+
+    <!-- Last.fm NOW card -->
+    <div id="music" class="now-item">
+      <img id="album-art" src="" alt="Album art" />
+      <div class="text-block">
+        <div id="track-status">🎧 Loading music...</div>
+        <div id="track-name"></div>
+        <div id="track-playcount"></div>
+        <div id="track-timestamp"></div>
+      </div>
+    </div>
   </div>
 
   <!-- Links Section -->
@@ -177,31 +177,39 @@ async function updateNowPlaying() {
   }
 }
 
-// ------------------------
-// Twitch Stream Status
-// ------------------------
 async function updateTwitchStatus() {
   try {
     const res = await fetch("https://decapi.me/twitch/uptime/raych_com");
     const text = await res.text();
 
-    const el = document.getElementById("twitch-status");
-    animateBoxUpdate(el, () => {
+    const card = document.getElementById("twitch-status");
+    const textBlock = card.querySelector(".text-block");
+    const mainText = textBlock.querySelector("#twitch-text");
+    const durationEl = textBlock.querySelector(".duration");
+
+    card.style.opacity = 0;
+    card.style.transform = "translateY(4px)";
+
+    setTimeout(() => {
       if (text.includes("offline")) {
-        el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Aquarium stream offline</a>`;
-        el.classList.remove("live", "animate");
+        mainText.innerHTML = `🐠 🐢 Aquarium stream offline`;
+        durationEl.textContent = "";
+        card.classList.remove("live");
       } else {
-        el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Live on Twitch (<span class="duration">${text}</span>)</a>`;
-        el.classList.add("live", "animate");
+        mainText.innerHTML = `🐠 🐢 Live on Twitch`;
+        durationEl.textContent = text;
+        card.classList.add("live");
       }
-    });
+
+      card.style.opacity = 1;
+      card.style.transform = "translateY(0)";
+    }, 300);
 
   } catch {
-    const el = document.getElementById("twitch-status");
-    animateBoxUpdate(el, () => {
-      el.textContent = "🐠 Stream status unavailable";
-      el.classList.remove("live", "animate");
-    });
+    const card = document.getElementById("twitch-status");
+    const textBlock = card.querySelector(".text-block");
+    textBlock.querySelector("#twitch-text").textContent = "🐠 Stream status unavailable";
+    textBlock.querySelector(".duration").textContent = "";
   }
 }
 
