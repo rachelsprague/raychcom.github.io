@@ -66,7 +66,7 @@ body_class: home-page
 </div>
 
 <!-- ================================
-     JS for Last.fm + Twitch Now Playing
+     Unified JS for Last.fm + Twitch Now Playing
 =============================== -->
 <script>
 const LASTFM_API_KEY = "362257f700e984e696cf0179e578e4f6";
@@ -74,11 +74,23 @@ const LASTFM_USER = "raych__";
 const REFRESH_MS = 60000; // refresh every 60s
 
 // ------------------------
+// Helper: smooth fade + slide update
+// ------------------------
+function animateBoxUpdate(box, callback) {
+  box.style.opacity = 0;
+  box.style.transform = "translateY(4px)";
+  setTimeout(() => {
+    callback();
+    box.style.opacity = 1;
+    box.style.transform = "translateY(0)";
+  }, 300);
+}
+
+// ------------------------
 // Last.fm Now Playing
 // ------------------------
 async function updateNowPlaying() {
   try {
-    // Get the most recent track
     const recentUrl = `https://ws.audioscrobbler.com/2.0/?method=user.getrecenttracks&user=${LASTFM_USER}&api_key=${LASTFM_API_KEY}&format=json&limit=1`;
     const res = await fetch(recentUrl);
     const data = await res.json();
@@ -93,7 +105,7 @@ async function updateNowPlaying() {
     const statusText = isNowPlaying ? "🎧 Now playing:" : "🎧 Last played:";
     const trackText = `${artist} — ${title}`;
 
-    // Timestamp if not currently playing
+    // Timestamp if not playing
     let timestampText = "";
     if (!isNowPlaying && track.date?.uts) {
       const playedTime = new Date(track.date.uts * 1000);
@@ -105,33 +117,22 @@ async function updateNowPlaying() {
     }
 
     const musicBox = document.getElementById("music");
+    if (isNowPlaying) musicBox.classList.add("playing");
+    else musicBox.classList.remove("playing");
 
-    if (isNowPlaying) {
-      musicBox.classList.add("playing");
-    } else {
-      musicBox.classList.remove("playing");
-    }
-
-    // Fade out for smooth update
-    musicBox.style.opacity = 0;
-    musicBox.style.transform = "translateY(4px)";
-
-    setTimeout(async () => {
-      // Update text
+    animateBoxUpdate(musicBox, async () => {
       document.getElementById("track-status").textContent = statusText;
       document.getElementById("track-name").textContent = trackText;
 
-      // Update album art (clickable link to track on Last.fm)
+      // Album art clickable
       const albumArtEl = document.getElementById("album-art");
       albumArtEl.src = art;
       albumArtEl.onclick = () => {
-        const trackUrl = infoData?.track?.url || `https://www.last.fm/user/${LASTFM_USER}/library/tracks`;
+        const trackUrl = `https://www.last.fm/user/${LASTFM_USER}/library/tracks`;
         window.open(trackUrl, "_blank");
       };
 
-      // ------------------------
-      // Fetch correct play count
-      // ------------------------
+      // Play count via track.getInfo
       const trackInfoUrl = `https://ws.audioscrobbler.com/2.0/?method=track.getInfo&api_key=${LASTFM_API_KEY}&artist=${encodeURIComponent(artist)}&track=${encodeURIComponent(title)}&user=${LASTFM_USER}&format=json`;
       try {
         const infoRes = await fetch(trackInfoUrl);
@@ -148,7 +149,6 @@ async function updateNowPlaying() {
         }
         playCountEl.textContent = `${userPlayCount} plays`;
       } catch {
-        // fallback if info fetch fails
         let playCountEl = document.getElementById("track-playcount");
         if (playCountEl) playCountEl.textContent = "";
       }
@@ -165,22 +165,17 @@ async function updateNowPlaying() {
         }
         tsEl.textContent = timestampText;
       }
-
-      // Fade in
-      musicBox.style.opacity = 1;
-      musicBox.style.transform = "translateY(0)";
-    }, 300);
+    });
 
   } catch {
-    document.getElementById("track-status").textContent = "🎧 Music unavailable";
-    document.getElementById("track-name").textContent = "";
-    const albumArtEl = document.getElementById("album-art");
-    albumArtEl.src = "";
+    const musicBox = document.getElementById("music");
+    animateBoxUpdate(musicBox, () => {
+      document.getElementById("track-status").textContent = "🎧 Music unavailable";
+      document.getElementById("track-name").textContent = "";
+      document.getElementById("album-art").src = "";
+    });
   }
 }
-
-updateNowPlaying();
-setInterval(updateNowPlaying, REFRESH_MS);
 
 // ------------------------
 // Twitch Stream Status
@@ -191,27 +186,28 @@ async function updateTwitchStatus() {
     const text = await res.text();
 
     const el = document.getElementById("twitch-status");
-    el.style.opacity = 0;
-    el.style.transform = "translateY(4px)";
-
-    setTimeout(() => {
+    animateBoxUpdate(el, () => {
       if (text.includes("offline")) {
         el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Aquarium stream offline</a>`;
         el.classList.remove("live", "animate");
       } else {
-        el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Live on Twitch (${text})</a>`;
+        el.innerHTML = `<a href="https://www.twitch.tv/raych_com" target="_blank" rel="noopener">🐠 🐢 Live on Twitch (<span class="duration">${text}</span>)</a>`;
         el.classList.add("live", "animate");
       }
-      el.style.opacity = 1;
-      el.style.transform = "translateY(0)";
-    }, 300);
+    });
 
   } catch {
     const el = document.getElementById("twitch-status");
-    el.textContent = "🐠 Stream status unavailable";
+    animateBoxUpdate(el, () => {
+      el.textContent = "🐠 Stream status unavailable";
+      el.classList.remove("live", "animate");
+    });
   }
 }
 
+// Initial load + intervals
+updateNowPlaying();
 updateTwitchStatus();
+setInterval(updateNowPlaying, REFRESH_MS);
 setInterval(updateTwitchStatus, 60000);
 </script>
