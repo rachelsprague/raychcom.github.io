@@ -44,13 +44,11 @@ body_class: home-page
 
     <!-- Last.fm NOW card -->
     <div id="music" class="now-item">
+      <div id="track-status">🎧 Loading music...</div>
       <img id="album-art" src="" alt="Album art" />
-      <div class="text-block">
-        <div id="track-status">🎧 Loading music...</div>
-        <div id="track-name"></div>
-        <div id="track-playcount"></div>
-        <div id="track-timestamp"></div>
-      </div>
+      <div id="track-name"></div>
+      <div id="track-timestamp"></div>
+      <div id="track-playcount"></div>
     </div>
   </div>
 

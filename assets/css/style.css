@@ -175,76 +175,131 @@ h2 {
 }
 
 /* ================================
-   NOW card base
+   NOW card base (Last.fm + Twitch)
 =============================== */
-.now-item {
+.now-item,
+#music,
+#twitch-status {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 0.6rem;
-  padding: 0.8rem 1rem;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #eee;
+  text-align: left;
   font-size: 0.9rem;
   font-weight: normal;
+  color: #eee;
   transition: all 0.25s ease;
 }
 
-.now-item:hover {
+/* Hover effect for cards */
+.now-item:hover,
+#music:hover,
+#twitch-status:hover {
   transform: translateY(-2px) scale(1.01);
   border-color: rgba(255,255,255,0.35);
 }
 
-/* ================================
-   Text block inside cards
-=============================== */
-.text-block {
+/* -------------------------------
+   Clickable links inside cards
+------------------------------- */
+.now-item-link,
+#twitch-status a,
+#twitch-status a:visited,
+#twitch-status a:hover {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  color: inherit;
+  text-decoration: none;
   line-height: 1.3;
-  flex: 1; /* expand to fill horizontal space */
+  width: 100%;
 }
 
-/* Last.fm album art */
+/* ================================
+   Last.fm card stacked layout
+=============================== */
+#music {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+}
+
+/* Album art */
 #music img#album-art {
   width: 72px;
   height: 72px;
   border-radius: 8px;
   object-fit: cover;
   cursor: pointer;
-  transition: transform 0.35s ease;
+  transition: opacity 0.35s ease, transform 0.35s ease;
 }
 
 #music img#album-art:hover {
   transform: scale(1.05);
 }
 
-/* Timestamp / duration styling */
-#track-timestamp,
-#twitch-status .duration {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  font-weight: normal;
-  margin-top: 2px;
-  margin-left: 0;
+/* Text container */
+#music div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  line-height: 1.35;
 }
 
-/* ================================
-   Pulse animations
-=============================== */
+/* Timestamp and play count */
+#track-timestamp,
+#track-playcount {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-top: 1px;
+}
+
+/* Now playing pulse */
 #music.playing {
   animation: musicPulse 2s infinite ease-in-out;
   border-color: rgba(120, 170, 255, 0.6);
 }
 
+/* -------------------------------
+   Twitch card adjustments
+------------------------------- */
+#twitch-status {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0.9rem 1rem;
+  font-weight: normal;
+  font-size: 0.9rem;
+  gap: 0.6rem;
+}
+
+/* Twitch live pulse */
 #twitch-status.live {
   animation: twitchPulse 1.8s infinite ease-in-out;
   border-color: rgba(78, 228, 78, 0.6);
 }
 
+#twitch-status .duration {
+  font-size: 0.8rem;
+  opacity: 0.7;
+  margin-left: auto;
+  font-weight: normal;
+}
+
+/* Hover pulse shadow for Twitch */
+#twitch-status.live:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 8px rgba(78, 228, 78, 0.6);
+  cursor: pointer;
+}
+
+/* ================================
+   Pulse animations
+=============================== */
 @keyframes musicPulse {
   0%,100% { box-shadow: 0 0 6px rgba(120,170,255,0.35); }
   50% { box-shadow: 0 0 14px rgba(120,170,255,0.6); }
@@ -253,125 +308,6 @@ h2 {
 @keyframes twitchPulse {
   0%,100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
   50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
-}
-
-/* Responsive: stack cards vertically on small screens */
-@media screen and (max-width: 480px) {
-  .now-item {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.45rem;
-  }
-
-  .text-block {
-    align-items: center;
-    text-align: center;
-  }
-
-  #music img#album-art {
-    width: 64px;
-    height: 64px;
-  }
-}
-
-/* ================================
-   NOW card base
-=============================== */
-.now-item {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 0.6rem;
-  padding: 0.8rem 1rem;
-  background: rgba(255,255,255,0.05);
-  border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.15);
-  color: #eee;
-  font-size: 0.9rem;
-  font-weight: normal;
-  transition: all 0.25s ease;
-}
-
-.now-item:hover {
-  transform: translateY(-2px) scale(1.01);
-  border-color: rgba(255,255,255,0.35);
-}
-
-/* ================================
-   Text block inside cards
-=============================== */
-.text-block {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  line-height: 1.3;
-  flex: 1; /* expand to fill horizontal space */
-}
-
-/* Last.fm album art */
-#music img#album-art {
-  width: 72px;
-  height: 72px;
-  border-radius: 8px;
-  object-fit: cover;
-  cursor: pointer;
-  transition: transform 0.35s ease;
-}
-
-#music img#album-art:hover {
-  transform: scale(1.05);
-}
-
-/* Timestamp / duration styling */
-#track-timestamp,
-#twitch-status .duration {
-  font-size: 0.8rem;
-  opacity: 0.7;
-  font-weight: normal;
-  margin-top: 2px;
-  margin-left: 0;
-}
-
-/* ================================
-   Pulse animations
-=============================== */
-#music.playing {
-  animation: musicPulse 2s infinite ease-in-out;
-  border-color: rgba(120, 170, 255, 0.6);
-}
-
-#twitch-status.live {
-  animation: twitchPulse 1.8s infinite ease-in-out;
-  border-color: rgba(78, 228, 78, 0.6);
-}
-
-@keyframes musicPulse {
-  0%,100% { box-shadow: 0 0 6px rgba(120,170,255,0.35); }
-  50% { box-shadow: 0 0 14px rgba(120,170,255,0.6); }
-}
-
-@keyframes twitchPulse {
-  0%,100% { box-shadow: 0 0 6px rgba(78,228,78,0.4); }
-  50% { box-shadow: 0 0 12px rgba(78,228,78,0.6); }
-}
-
-/* Responsive: stack cards vertically on small screens */
-@media screen and (max-width: 480px) {
-  .now-item {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.45rem;
-  }
-
-  .text-block {
-    align-items: center;
-    text-align: center;
-  }
-
-  #music img#album-art {
-    width: 64px;
-    height: 64px;
-  }
 }
 
 /* ================================
@@ -395,4 +331,43 @@ footer a {
 
 footer a:hover {
   color: #222;
+}
+
+/* ================================
+   Mobile adjustments
+=============================== */
+@media screen and (max-width: 480px) {
+  body {
+    padding: 1.2rem;
+  }
+
+  .landing-container {
+    width: 90%;
+    padding: 1.5rem 1.2rem;
+  }
+
+  .now-item,
+  #music,
+  #twitch-status {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.45rem;
+    padding: 0.7rem 0.8rem;
+  }
+
+  #music img#album-art {
+    width: 64px;
+    height: 64px;
+  }
+
+  #music div,
+  #twitch-status a {
+    text-align: center;
+  }
+
+  #track-timestamp,
+  #track-playcount,
+  #twitch-status .duration {
+    font-size: 0.8rem;
+  }
 }
