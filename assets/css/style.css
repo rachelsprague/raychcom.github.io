@@ -188,6 +188,7 @@ h2 {
   font-weight: normal;
   color: #eee;
   transition: all 0.25s ease;
+  width: 250px;
 }
 
 /* ================================
